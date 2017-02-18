@@ -17,7 +17,7 @@ namespace PDFUnisci
 		int lenFiles;       //Conteggio file inclusa la cover
 
 		//Config
-		int DefaultDigit { get; set; }   //Imposta i digit che avrà il nome file diviso
+		int DefaultDigit { get; set; }          //Imposta i digit che avrà il nome file diviso
 		int ExitConfirmation { get; set; }		//Chiede conferma di uscita
 		int CoverFunction { get; set; }			//Abilita la funzione unisci cover
 
