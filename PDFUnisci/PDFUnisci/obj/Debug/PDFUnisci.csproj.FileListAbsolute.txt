@@ -1,0 +1,59 @@
+c:\users\claud\documents\visual studio 2015\Projects\PDFUnisci\PDFUnisci\bin\Debug\PDFUnisci.exe.config
+C:\Users\claud\Documents\Visual Studio 2015\Projects\PDFUnisci\PDFUnisci\obj\Debug\PDFUnisci.csprojResolveAssemblyReference.cache
+C:\Users\claud\Documents\Visual Studio 2015\Projects\PDFUnisci\PDFUnisci\obj\Debug\PDFUnisci.Properties.Resources.resources
+C:\Users\claud\Documents\Visual Studio 2015\Projects\PDFUnisci\PDFUnisci\obj\Debug\PDFUnisci.csproj.GenerateResource.Cache
+C:\Users\claud\Documents\Visual Studio 2015\Projects\PDFUnisci\PDFUnisci\bin\Debug\PDFUnisci.exe
+C:\Users\claud\Documents\Visual Studio 2015\Projects\PDFUnisci\PDFUnisci\bin\Debug\PDFUnisci.pdb
+C:\Users\claud\Documents\Visual Studio 2015\Projects\PDFUnisci\PDFUnisci\obj\Debug\PDFUnisci.exe
+C:\Users\claud\Documents\Visual Studio 2015\Projects\PDFUnisci\PDFUnisci\obj\Debug\PDFUnisci.pdb
+C:\Users\claud\Google Drive\Programmi\C#\PDFUnisci\PDFUnisci\bin\Debug\PDFUnisci.exe.config
+C:\Users\claud\Google Drive\Programmi\C#\PDFUnisci\PDFUnisci\obj\Debug\PDFUnisci.exe
+C:\Users\claud\Google Drive\Programmi\C#\PDFUnisci\PDFUnisci\obj\Debug\PDFUnisci.pdb
+C:\Users\claud\Google Drive\Programmi\C#\PDFUnisci\PDFUnisci\bin\Debug\PDFUnisci.exe
+C:\Users\claud\Google Drive\Programmi\C#\PDFUnisci\PDFUnisci\bin\Debug\PDFUnisci.pdb
+C:\Users\claud\Google Drive\Programmi\C#\PDFUnisci\PDFUnisci\obj\Debug\PDFUnisci.csprojResolveAssemblyReference.cache
+C:\Users\claud\Google Drive\Programmi\C#\PDFUnisci\PDFUnisci\obj\Debug\PDFUnisci.Properties.Resources.resources
+C:\Users\claud\Google Drive\Programmi\C#\PDFUnisci\PDFUnisci\obj\Debug\PDFUnisci.csproj.GenerateResource.Cache
+C:\Users\claud\Google Drive\Programmi\C#\PDFUnisci\PDFUnisci\obj\Debug\Interop.IWshRuntimeLibrary.dll
+C:\Users\claud\Google Drive\Programmi\C#\PDFUnisci\PDFUnisci\obj\Debug\PDFUnisci.csproj.ResolveComReference.cache
+E:\Google Drive\Programmi\C#\PDFUnisci\PDFUnisci\bin\Debug\PDFUnisci.exe.config
+E:\Google Drive\Programmi\C#\PDFUnisci\PDFUnisci\obj\Debug\Interop.IWshRuntimeLibrary.dll
+E:\Google Drive\Programmi\C#\PDFUnisci\PDFUnisci\obj\Debug\PDFUnisci.csproj.ResolveComReference.cache
+E:\Google Drive\Programmi\C#\PDFUnisci\PDFUnisci\obj\Debug\PDFUnisci.exe
+E:\Google Drive\Programmi\C#\PDFUnisci\PDFUnisci\obj\Debug\PDFUnisci.pdb
+E:\Google Drive\Programmi\C#\PDFUnisci\PDFUnisci\bin\Debug\PDFUnisci.exe
+E:\Google Drive\Programmi\C#\PDFUnisci\PDFUnisci\bin\Debug\PDFUnisci.pdb
+E:\Google Drive\Programmi\C#\PDFUnisci\PDFUnisci\obj\Debug\PDFUnisci.csprojResolveAssemblyReference.cache
+E:\Google Drive\Programmi\C#\PDFUnisci\PDFUnisci\obj\Debug\PDFUnisci.Properties.Resources.resources
+E:\Google Drive\Programmi\C#\PDFUnisci\PDFUnisci\obj\Debug\PDFUnisci.csproj.GenerateResource.Cache
+C:\Users\V082\Documents\Visual Studio 2017\Projects\PDFUnisci\PDFUnisci\bin\Debug\PDFUnisci.exe.config
+C:\Users\V082\Documents\Visual Studio 2017\Projects\PDFUnisci\PDFUnisci\bin\Debug\PDFUnisci.exe
+C:\Users\V082\Documents\Visual Studio 2017\Projects\PDFUnisci\PDFUnisci\bin\Debug\PDFUnisci.pdb
+C:\Users\V082\Documents\Visual Studio 2017\Projects\PDFUnisci\PDFUnisci\obj\Debug\PDFUnisci.csprojResolveAssemblyReference.cache
+C:\Users\V082\Documents\Visual Studio 2017\Projects\PDFUnisci\PDFUnisci\obj\Debug\Interop.IWshRuntimeLibrary.dll
+C:\Users\V082\Documents\Visual Studio 2017\Projects\PDFUnisci\PDFUnisci\obj\Debug\PDFUnisci.csproj.ResolveComReference.cache
+C:\Users\V082\Documents\Visual Studio 2017\Projects\PDFUnisci\PDFUnisci\obj\Debug\PDFUnisci.Properties.Resources.resources
+C:\Users\V082\Documents\Visual Studio 2017\Projects\PDFUnisci\PDFUnisci\obj\Debug\PDFUnisci.csproj.GenerateResource.Cache
+C:\Users\V082\Documents\Visual Studio 2017\Projects\PDFUnisci\PDFUnisci\obj\Debug\PDFUnisci.exe
+C:\Users\V082\Documents\Visual Studio 2017\Projects\PDFUnisci\PDFUnisci\obj\Debug\PDFUnisci.pdb
+C:\Users\V082\Documents\Visual Studio 2017\Projects\PDFUnisci\PDFUnisci\bin\Debug\PdfSharp.Charting.dll
+C:\Users\V082\Documents\Visual Studio 2017\Projects\PDFUnisci\PDFUnisci\bin\Debug\PdfSharp.dll
+C:\Users\V082\Documents\Visual Studio 2017\Projects\PDFUnisci\PDFUnisci\bin\Debug\PdfSharp.xml
+C:\Users\V082\Documents\Visual Studio 2017\Projects\PDFUnisci\PDFUnisci\bin\Debug\PdfSharp.Charting.xml
+C:\Users\V082\Documents\Visual Studio 2017\Projects\PDFUnisci\PDFUnisci\bin\Debug\de\PdfSharp.resources.dll
+C:\Users\V082\Documents\Visual Studio 2017\Projects\PDFUnisci\PDFUnisci\bin\Debug\de\PdfSharp.Charting.resources.dll
+C:\Users\claud\Google Drive\Programmi\C#\PDFUnisci\PDFUnisci\bin\Debug\PdfSharp.dll
+C:\Users\claud\Google Drive\Programmi\C#\PDFUnisci\PDFUnisci\bin\Debug\PdfSharp.xml
+C:\Users\claud\Google Drive\Programmi\C#\PDFUnisci\PDFUnisci\bin\Debug\de\PdfSharp.resources.dll
+C:\Users\V082\Documents\Projects\PDFUnisci\PDFUnisci\bin\Debug\PDFUnisci.exe.config
+C:\Users\V082\Documents\Projects\PDFUnisci\PDFUnisci\obj\Debug\Interop.IWshRuntimeLibrary.dll
+C:\Users\V082\Documents\Projects\PDFUnisci\PDFUnisci\obj\Debug\PDFUnisci.csproj.ResolveComReference.cache
+C:\Users\V082\Documents\Projects\PDFUnisci\PDFUnisci\obj\Debug\PDFUnisci.exe
+C:\Users\V082\Documents\Projects\PDFUnisci\PDFUnisci\obj\Debug\PDFUnisci.pdb
+C:\Users\V082\Documents\Projects\PDFUnisci\PDFUnisci\obj\Debug\PDFUnisci.csprojResolveAssemblyReference.cache
+C:\Users\V082\Documents\Projects\PDFUnisci\PDFUnisci\obj\Debug\PDFUnisci.Properties.Resources.resources
+C:\Users\V082\Documents\Projects\PDFUnisci\PDFUnisci\obj\Debug\PDFUnisci.csproj.GenerateResource.Cache
+C:\Users\V082\Documents\Projects\PDFUnisci\PDFUnisci\bin\Debug\PDFUnisci.exe
+C:\Users\V082\Documents\Projects\PDFUnisci\PDFUnisci\bin\Debug\PDFUnisci.pdb
+C:\Users\V082\Documents\Projects\PDFUnisci\PDFUnisci\bin\Debug\itextsharp.dll
+C:\Users\V082\Documents\Projects\PDFUnisci\PDFUnisci\bin\Debug\itextsharp.xml
