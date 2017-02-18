@@ -10,14 +10,11 @@ namespace PDFUnisci
 
     public static class PdfInterface
     {
-        static private void UnisciPDF(List<string> files)
+        static private void UnisciPDF(List<string> files, string OutFile)
         {
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("Unisco tutti i file in un unico PDF\n");
             Console.ResetColor();
-
-            //Creo il nomefile
-            string OutFile = Path.GetDirectoryName(files[0]) + Path.DirectorySeparatorChar + Path.GetFileNameWithoutExtension(files[0]) + "_merged.pdf";
 
             using (FileStream stream = new FileStream(OutFile, FileMode.Create))
             using (Document doc = new Document())
