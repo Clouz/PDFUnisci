@@ -1,2 +1,2 @@
 # PDFUnisci
-Unici e dividi PDF con un semplice click
+Merge and split PDF with a simple right click
