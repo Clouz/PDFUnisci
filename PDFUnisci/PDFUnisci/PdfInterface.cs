@@ -1,9 +1,10 @@
-using System;
 using System.IO;
 
 using iTextSharp.text;
 using iTextSharp.text.pdf;
 using System.Collections.Generic;
+
+using LogManager;
 
 namespace PDFUnisci
 {
@@ -12,9 +13,7 @@ namespace PDFUnisci
     {
         static private void UnisciPDF(List<string> files, string OutFile)
         {
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("Unisco tutti i file in un unico PDF\n");
-            Console.ResetColor();
+            LogHelper.Log(LogTarget.Console, LogType.Successful, "Unisco tutti i file in un unico PDF");
 
             using (FileStream stream = new FileStream(OutFile, FileMode.Create))
             using (Document doc = new Document())
@@ -24,20 +23,11 @@ namespace PDFUnisci
 
                 foreach (string file in files)
                 {
-                    //Verifico se esiste il file e se ha come estensione .pdf
-                    if (System.IO.File.Exists(file) && Path.GetExtension(file).ToLower() == ".pdf")
-                    {
-                        Console.WriteLine($"Apro il file: {file}");
-                        pdf.AddDocument(new iTextSharp.text.pdf.PdfReader(file));
-                    }
-                    else
-                    {
-                        Console.WriteLine($"{file}\t- File non valido, verrà escluso dal PDF");
-                    }
+                    LogHelper.Log(LogTarget.Console, LogType.Normal, $"Apro il file: {file}");
+                    pdf.AddDocument(new iTextSharp.text.pdf.PdfReader(file));
                 }
 
-                //se doc non è null lo chiude. (Null-conditional operators ?. ??)
-                doc?.Close();
+                doc.Close();
             }
         }
 
