@@ -9,7 +9,6 @@
 //------------------------------------------------------------------------------
 
 namespace PDFUnisci.Properties {
-    using System;
     
     
     /// <summary>
