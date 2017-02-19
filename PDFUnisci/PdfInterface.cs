@@ -56,14 +56,9 @@ namespace PDFUnisci
                 foreach (string file in files)
                 {
                     //todo: approfondire crash
-                    LogHelper.Log($"Apro il file: {file}");
-                    var x = new PdfReader(file);
-                    pdf.AddDocument(x);
-                    pdf.FreeReader(x);
-                    
+                    LogHelper.Log($"Aggiungo il file: {file}");
+                    pdf.AddDocument(new iTextSharp.text.pdf.PdfReader(file));
                 }
-
-                doc.Close();
             }
         }
 
@@ -132,7 +127,7 @@ namespace PDFUnisci
                     string outFile = string.Format("{0}_Page {1:D" + digitN + "}.pdf", outFiles, i);
                     FileStream stream = new FileStream(outFile, FileMode.Create);
 
-                    LogHelper.Log($"Apro il file: {InFiles}");
+                    LogHelper.Log($"Pagina: {Path.GetFileNameWithoutExtension(outFile)}");
                     Document doc = new Document();
                     PdfCopy pdf = new PdfCopy(doc, stream);
 
