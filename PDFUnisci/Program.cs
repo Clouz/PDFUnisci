@@ -51,9 +51,9 @@ namespace PDFUnisci
                     break;
             }
 
-			if (Config.ExitConfirmation == 1)
+			if (Config.ExitConfirmation == 1 || LogHelper.ErrorLog.Count > 0)
 			{
-				Console.WriteLine("\nPremere invio per chiudere");
+				Console.Write("\nPremere invio per chiudere...");
 				Console.Read();
 			}
         }

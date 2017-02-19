@@ -36,12 +36,12 @@ namespace PDFUnisci
                 if(risposta.ToLower() == "si" || risposta.ToLower() == "s")
                 {
                     System.IO.File.Delete(collegamento);
-                    Console.WriteLine("Collegamento eliminato...");
+                    Console.Write("Collegamento eliminato...");
                     Console.Read();
                 }
                 else
                 {
-                    Console.WriteLine("Come non detto...");
+                    Console.Write("Come non detto...");
                     Console.Read();
                 }
             }
@@ -62,12 +62,12 @@ namespace PDFUnisci
                     shortcut.TargetPath = System.Reflection.Assembly.GetExecutingAssembly().Location;
                     shortcut.Save();
 
-                    Console.WriteLine("Collegamento creato...");
+                    Console.Write("Collegamento creato...");
                     Console.Read();
                 }
                 else
                 {
-                    Console.WriteLine("Come non detto...");
+                    Console.Write("Come non detto...");
                     Console.Read();
                 }
 			} 
