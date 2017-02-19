@@ -33,11 +33,14 @@ namespace PDFUnisci
                 Console.Write("> ");
                 string risposta = Console.ReadLine();
 
-                if(risposta.ToLower() == "si" || risposta.ToLower() == "s") {
+                if(risposta.ToLower() == "si" || risposta.ToLower() == "s")
+                {
                     System.IO.File.Delete(collegamento);
                     Console.WriteLine("Collegamento eliminato...");
+                    Console.Read();
                 }
-                else {
+                else
+                {
                     Console.WriteLine("Come non detto...");
                     Console.Read();
                 }
@@ -48,7 +51,8 @@ namespace PDFUnisci
                 Console.Write("> ");
                 string risposta = Console.ReadLine();
 
-                if (risposta.ToLower() == "si" || risposta.ToLower() == "s") {
+                if (risposta.ToLower() == "si" || risposta.ToLower() == "s")
+                {
 
                     //Creo il collegamento
                     object shDesktop = (object)"Desktop";
@@ -58,11 +62,14 @@ namespace PDFUnisci
                     shortcut.TargetPath = System.Reflection.Assembly.GetExecutingAssembly().Location;
                     shortcut.Save();
 
-                    Console.WriteLine("Collegamento creato...");      
+                    Console.WriteLine("Collegamento creato...");
+                    Console.Read();
                 }
                 else
+                {
                     Console.WriteLine("Come non detto...");
-					Console.Read();
+                    Console.Read();
+                }
 			} 
         }
 

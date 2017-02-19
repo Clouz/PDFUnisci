@@ -39,7 +39,7 @@ namespace PDFUnisci
 
             if(Files.Count() == 2)
             {
-                Cover = Files.Find( x => Path.GetFileNameWithoutExtension(x).ToLower().Contains("cover")).FirstOrDefault().ToString();
+                Cover = Files.FirstOrDefault(x => Path.GetFileNameWithoutExtension(x).ToLower().Contains("cover"));
 
                 if (Cover != null) 
                     Files.Remove(Cover);

@@ -56,3 +56,15 @@ C:\Users\V082\Documents\Projects\PDFUnisci\PDFUnisci\bin\Debug\itextsharp.dll
 C:\Users\V082\Documents\Projects\PDFUnisci\PDFUnisci\bin\Debug\itextsharp.xml
 C:\Users\claud\Google Drive\Programmi\C#\PDFUnisci\PDFUnisci\bin\Debug\itextsharp.dll
 C:\Users\claud\Google Drive\Programmi\C#\PDFUnisci\PDFUnisci\bin\Debug\itextsharp.xml
+C:\Users\claud\Desktop\PDFUnisci\PDFUnisci\bin\Debug\PDFUnisci.exe.config
+C:\Users\claud\Desktop\PDFUnisci\PDFUnisci\bin\Debug\PDFUnisci.exe
+C:\Users\claud\Desktop\PDFUnisci\PDFUnisci\bin\Debug\PDFUnisci.pdb
+C:\Users\claud\Desktop\PDFUnisci\PDFUnisci\bin\Debug\itextsharp.dll
+C:\Users\claud\Desktop\PDFUnisci\PDFUnisci\bin\Debug\itextsharp.xml
+C:\Users\claud\Desktop\PDFUnisci\PDFUnisci\obj\Debug\PDFUnisci.csprojResolveAssemblyReference.cache
+C:\Users\claud\Desktop\PDFUnisci\PDFUnisci\obj\Debug\Interop.IWshRuntimeLibrary.dll
+C:\Users\claud\Desktop\PDFUnisci\PDFUnisci\obj\Debug\PDFUnisci.csproj.ResolveComReference.cache
+C:\Users\claud\Desktop\PDFUnisci\PDFUnisci\obj\Debug\PDFUnisci.Properties.Resources.resources
+C:\Users\claud\Desktop\PDFUnisci\PDFUnisci\obj\Debug\PDFUnisci.csproj.GenerateResource.Cache
+C:\Users\claud\Desktop\PDFUnisci\PDFUnisci\obj\Debug\PDFUnisci.exe
+C:\Users\claud\Desktop\PDFUnisci\PDFUnisci\obj\Debug\PDFUnisci.pdb

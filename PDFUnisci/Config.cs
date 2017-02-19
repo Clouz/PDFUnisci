@@ -7,18 +7,18 @@ namespace PDFUnisci
     {
         static XDocument config = null;
 
-        public static int? ExitConfirmation
+        static int _ExitConfirmation = 0;
+        public static int ExitConfirmation
         { 
             get
             {
-                if (ExitConfirmation == null) return 0;
-                else return ExitConfirmation;
+                return _ExitConfirmation;
             }
 
             set
             { 
-                if(value >= 1) value = 1;
-                else value = 0;
+                if(value >= 1) _ExitConfirmation = 1;
+                else _ExitConfirmation = 0;
             } 
         }
 
@@ -46,16 +46,16 @@ namespace PDFUnisci
                 System.Console.WriteLine("Il file config.xml non è stato trovato, verrà creato");
             }
 
+            
             //Leggo il file xml
-            PDFInterface.DefaultDigit = ReadConfig(PDFInterface.DefaultDigit);
-            ExitConfirmation = ReadConfig(ExitConfirmation);
-            PDFInterface.CoverFunction = ReadConfig(PDFInterface.CoverFunction);
+            PDFInterface.DefaultDigit = ReadConfig(PDFInterface.DefaultDigit, nameof(PDFInterface.DefaultDigit));
+            ExitConfirmation = ReadConfig(ExitConfirmation, nameof(ExitConfirmation));
+            PDFInterface.CoverFunction = ReadConfig(PDFInterface.CoverFunction, nameof(PDFInterface.CoverFunction));
         }
 
-        static int? ReadConfig(int? option)
+        static int ReadConfig(int option, string nameof)
         {
-            int i;
-            if (int.TryParse(config.Elements("config").Select(o => o.Element($"{nameof(option)}").Value).First(), out i)) return i;
+            if (int.TryParse(config.Elements("config").Select(o => o.Element($"{nameof}").Value).First(), out int i)) return i;
             else return option;
         }
     }

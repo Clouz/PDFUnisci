@@ -11,33 +11,35 @@ namespace PDFUnisci
 {
     public static class PDFInterface
     {
-        public static int? DefaultDigit
+        static int _DefaultDigit = 3;
+
+        public static int DefaultDigit
         { 
             get
             {
-                if (DefaultDigit == null) return 3;
-                else return CoverFunction;
+                return _DefaultDigit;
             }
 
             set
-            { 
-                if(value >= 10) value = 10;
-                else if(value <= 1) value = 1;
+            {
+                if (value >= 10) _DefaultDigit = 10;
+                else if (value <= 1) _DefaultDigit = 1;
+                else _DefaultDigit = value;
             } 
         }
 
-        public static int? CoverFunction 
+        static int _CoverFunction = 1;
+        public static int CoverFunction 
         { 
             get
             {
-                if (CoverFunction == null) return 1;
-                else return CoverFunction;
+                return _CoverFunction;
             }
 
             set
             { 
-                if(value >= 1) value = 1;
-                else value = 0;
+                if(value >= 1) _CoverFunction = 1;
+                else _CoverFunction = 0;
             } 
         }
                
@@ -53,8 +55,12 @@ namespace PDFUnisci
 
                 foreach (string file in files)
                 {
+                    //todo: approfondire crash
                     LogHelper.Log($"Apro il file: {file}");
-                    pdf.AddDocument(new iTextSharp.text.pdf.PdfReader(file));
+                    var x = new PdfReader(file);
+                    pdf.AddDocument(x);
+                    pdf.FreeReader(x);
+                    
                 }
 
                 doc.Close();
@@ -64,10 +70,13 @@ namespace PDFUnisci
         public static void ReplaceCoverPDF(string InFile, string InCover, string OutFile)
         {
             if(CoverFunction == 0) 
-            {   
-                List<string> Files = new List<string>();
-                Files.Add(InFile);
-                Files.Add(InCover);
+            {
+                List<string> Files = new List<string>
+                {
+                    InFile,
+                    InCover
+                };
+                Files.Sort();
                 MergePDF(Files, OutFile);
                 return;
             }
@@ -93,7 +102,7 @@ namespace PDFUnisci
                 reader = new iTextSharp.text.pdf.PdfReader(InFile);
                 int count = reader.NumberOfPages;
                 coverPage++;
-                List<int> pages = Enumerable.Range(coverPage, count - coverPage).ToList();
+                List<int> pages = Enumerable.Range(coverPage, count - coverPage + 1).ToList();
 
                 LogHelper.Log($"Aggiungo il file: {InFile} da pagina: {coverPage}");
                 pdf.AddDocument(reader, pages);

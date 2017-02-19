@@ -2,9 +2,9 @@
 <!--PDFUnisci config-->
 <config>
   <!--Indica il numero di digit quando si divide un PDF-->
-  <DefaultDigit>3</DefaultDigit>
+  <DefaultDigit>1</DefaultDigit>
   <!--Il programma rimane aperto fino alla pressione di un tasto-->
-  <ExitConfirmation>0</ExitConfirmation>
-  <!--Se impostatp a zero disattiva la funziona per sostituire la cover-->
-  <CoverFunction>1</CoverFunction>
+  <ExitConfirmation>1</ExitConfirmation>
+  <!--Se impostato a zero disattiva la funziona per sostituire la cover-->
+  <CoverFunction>0</CoverFunction>
 </config>
