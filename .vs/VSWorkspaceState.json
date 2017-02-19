@@ -1,8 +1,9 @@
 {
   "ExpandedNodes": [
     "",
-    "\\PDFUnisci"
+    "\\PDFUnisci",
+    "\\PDFUnisci\\packages",
+    "\\PDFUnisci\\PDFUnisci"
   ],
-  "SelectedNode": "\\PDFUnisci",
   "PreviewInSolutionExplorer": false
 }
