@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace LogManager
 {
@@ -12,18 +13,14 @@ namespace LogManager
         Error, Normal, Successful
     }
 
-    public abstract class LogBase
+    abstract class LogBase
     {
-        public abstract void Log(string message);
+        public abstract void Log(string message, LogType type);
     }
 
-    public class ConsoleLogger : LogBase
+    class ConsoleLogger : LogBase
     {
-        public override void Log(string message)
-        {
-            Log(LogType.Normal, message);
-        }
-        public void Log(LogType type, string message)
+        public override void Log(string message, LogType type)
         {
             switch (type)
             {
@@ -37,6 +34,7 @@ namespace LogManager
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine(message);
                 Console.ResetColor();
+                LogHelper.ErrorLog.Add(message);
                 break;
 
                 case LogType.Successful:
@@ -52,14 +50,15 @@ namespace LogManager
     public static class LogHelper
     {
         private static LogBase logger = null;
+        public static List<string> ErrorLog = new List<string>();
 
-        public static void Log(LogTarget target, LogType type, string message)
+        public static void Log(string message, LogTarget target = LogTarget.Console, LogType type = LogType.Normal)
         {
             switch (target)
             {
                 case LogTarget.Console:
                 logger = new ConsoleLogger();
-                logger.Log( type, message);
+                logger.Log(message,  type);
                 break;
 
                 case LogTarget.EventLog:
@@ -71,5 +70,11 @@ namespace LogManager
                 break;
             }
         }
+
+        public static void Log(string message, LogType type)
+        {
+            Log(message, LogTarget.Console, type);
+        }
+
     }
 }
