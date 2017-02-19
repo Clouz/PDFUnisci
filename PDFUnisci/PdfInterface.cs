@@ -34,7 +34,7 @@ namespace PDFUnisci
 
         static private void DividiPDF(string InFiles, string OutDir)
         {
-            string OutFile = OutDir + Path.AltDirectorySeparatorChar + Path.GetFileNameWithoutExtension(InFiles);
+            string outFiles = OutDir + Path.AltDirectorySeparatorChar + Path.GetFileNameWithoutExtension(InFiles);
 
             LogHelper.Log(LogTarget.Console, LogType.Normal, $"Creo la directory in: {OutDir}");
             Directory.CreateDirectory(OutDir);
@@ -46,13 +46,13 @@ namespace PDFUnisci
                 int NumPages = reader.NumberOfPages;
 
                 //todo: da verificare, non mi convince
-                int digitN = NumPages;
+                int digitN = NumPages.ToString().Length;
                 if (digitN < DefaultDigit)
                     digitN = DefaultDigit;
 
                 for (int i = 1; i <= NumPages; i++)
                 {
-                    string outFile = string.Format("{0}_Page {1:D" + digitN + "}.pdf", OutFile, i);
+                    string outFile = string.Format("{0}_Page {1:D" + digitN + "}.pdf", outFiles, i);
                     FileStream stream = new FileStream(outFile, FileMode.Create);
 
                     LogHelper.Log(LogTarget.Console, LogType.Normal, $"Apro il file: {InFiles}");

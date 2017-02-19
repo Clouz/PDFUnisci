@@ -14,12 +14,16 @@ namespace LogManager
 
     public abstract class LogBase
     {
-        public abstract void Log(LogType type, string message);
+        public abstract void Log(string message);
     }
 
     public class ConsoleLogger : LogBase
     {
-        public override void Log(LogType type, string message)
+        public override void Log(string message)
+        {
+            Log(LogType.Normal, message);
+        }
+        public void Log(LogType type, string message)
         {
             switch (type)
             {
