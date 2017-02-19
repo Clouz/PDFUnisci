@@ -11,6 +11,7 @@ namespace PDFUnisci
     public static class PdfInterface
     {
         static int DefaultDigit = 3;
+               
         static private void UnisciPDF(List<string> files, string OutFile)
         {
             LogHelper.Log(LogTarget.Console, LogType.Successful, "Unisco tutti i file in un unico PDF");
