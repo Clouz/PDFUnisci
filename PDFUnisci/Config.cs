@@ -1,5 +1,6 @@
 using System.Linq;
 using System.Xml.Linq;
+using LogManager;
 
 namespace PDFUnisci
 {
@@ -12,6 +13,7 @@ namespace PDFUnisci
         { 
             get
             {
+                if (LogHelper.ErrorLog.Count() > 0) return 1;
                 return _ExitConfirmation;
             }
 
@@ -55,7 +57,8 @@ namespace PDFUnisci
 
         static int ReadConfig(int option, string nameof)
         {
-            if (int.TryParse(config.Elements("config").Select(o => o.Element($"{nameof}").Value).First(), out int i)) return i;
+            int i;
+            if (int.TryParse(config.Elements("config").Select(o => o.Element($"{nameof}").Value).First(), out i)) return i;
             else return option;
         }
     }

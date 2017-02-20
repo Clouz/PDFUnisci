@@ -12,7 +12,7 @@
     <ProjectView>ProjectFiles</ProjectView>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
-    <StartArguments>C:/Users/claud/Desktop/1_merged_split/5.pdf C:/Users/claud/Desktop/1_merged_split/6.pdf C:/Users/claud/Desktop/1_merged_split/7.pdf C:/Users/claud/Desktop/1_merged_split/1.pdf C:/Users/claud/Desktop/1_merged_split/1_merged.pdf C:/Users/claud/Desktop/1_merged_split/4.pdf</StartArguments>
+    <StartArguments>"C:/GitHub/PDFUnisci/PDFUnisci/bin/Debug/1_merged_split/1_merged_Page 2.pdf" "C:/GitHub/PDFUnisci/PDFUnisci/bin/Debug/1_merged_split/1_merged_Page 2_merged%281%29.pdf" "C:/GitHub/PDFUnisci/PDFUnisci/bin/Debug/1_merged_split/1_merged_Page 2_merged.pdf" "C:/GitHub/PDFUnisci/PDFUnisci/bin/Debug/1_merged_split/1_merged_Page 3.pdf"</StartArguments>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
     <StartArguments>"C:/Users/claud/Downloads/emacs %281%29.pdf"</StartArguments>

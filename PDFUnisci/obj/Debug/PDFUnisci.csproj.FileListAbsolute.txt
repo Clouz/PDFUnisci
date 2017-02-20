@@ -1,0 +1,12 @@
+C:\GitHub\PDFUnisci\PDFUnisci\bin\Debug\PDFUnisci.exe.config
+C:\GitHub\PDFUnisci\PDFUnisci\obj\Debug\Interop.IWshRuntimeLibrary.dll
+C:\GitHub\PDFUnisci\PDFUnisci\obj\Debug\PDFUnisci.csproj.ResolveComReference.cache
+C:\GitHub\PDFUnisci\PDFUnisci\obj\Debug\PDFUnisci.csprojResolveAssemblyReference.cache
+C:\GitHub\PDFUnisci\PDFUnisci\obj\Debug\PDFUnisci.Properties.Resources.resources
+C:\GitHub\PDFUnisci\PDFUnisci\obj\Debug\PDFUnisci.csproj.GenerateResource.Cache
+C:\GitHub\PDFUnisci\PDFUnisci\bin\Debug\PDFUnisci.exe
+C:\GitHub\PDFUnisci\PDFUnisci\bin\Debug\PDFUnisci.pdb
+C:\GitHub\PDFUnisci\PDFUnisci\bin\Debug\itextsharp.dll
+C:\GitHub\PDFUnisci\PDFUnisci\bin\Debug\itextsharp.xml
+C:\GitHub\PDFUnisci\PDFUnisci\obj\Debug\PDFUnisci.exe
+C:\GitHub\PDFUnisci\PDFUnisci\obj\Debug\PDFUnisci.pdb

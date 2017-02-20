@@ -6,6 +6,7 @@ using System.Collections.Generic;
 
 using LogManager;
 using System.Linq;
+using System;
 
 namespace PDFUnisci
 {
@@ -42,15 +43,37 @@ namespace PDFUnisci
                 else _CoverFunction = 0;
             } 
         }
-               
-        public static void MergePDF(List<string> files, string OutFile)
+        
+        static string Contain(List<string> files, string outFile, int start)
         {
+            string OutFile = new Uri(outFile).ToString().Replace("file:///", "");
+
+            if (files.Contains(OutFile))
+                OutFile = OutFile.Replace(".pdf", $"({start}).pdf");
+
+            if (files.Contains(OutFile))
+                OutFile = Contain(files, OutFile, start+1);
+
+            return OutFile;
+        }
+
+        public static void MergePDF(List<string> files, string outFile)
+        {
+
+            string OutFile = outFile;
+
             LogHelper.Log("Unisco tutti i file in un unico PDF", LogType.Successful);
 
-            using (FileStream stream = new FileStream(OutFile, FileMode.Create))
-            using (Document doc = new Document())
-            using (PdfCopy pdf = new PdfCopy(doc, stream))
+            FileStream stream = null;
+            Document doc = null;
+            PdfCopy pdf = null;
+
+            try
             {
+                stream = new FileStream(OutFile, FileMode.Create);
+                doc = new Document();
+                pdf = new PdfCopy(doc, stream);
+
                 doc.Open();
 
                 foreach (string file in files)
@@ -59,6 +82,16 @@ namespace PDFUnisci
                     LogHelper.Log($"Aggiungo il file: {file}");
                     pdf.AddDocument(new iTextSharp.text.pdf.PdfReader(file));
                 }
+            }
+            catch (Exception e)
+            {
+                LogHelper.Log(e.ToString(), LogType.Error);
+            }
+            finally
+            {
+                pdf?.Dispose();
+                doc?.Dispose();
+                stream?.Dispose();
             }
         }
 
@@ -78,11 +111,16 @@ namespace PDFUnisci
 
             LogHelper.Log("Sostituisco la cover al file originario", LogType.Successful);
 
-            //Apro il file della cover
-            using (FileStream stream = new FileStream(OutFile, FileMode.Create))
-            using (Document doc = new Document())
-            using (PdfCopy pdf = new PdfCopy(doc, stream))
+            FileStream stream = null;
+            Document doc = null;
+            PdfCopy pdf = null;
+
+            try
             {
+                stream = new FileStream(OutFile, FileMode.Create);
+                doc = new Document();
+                pdf = new PdfCopy(doc, stream);
+
                 doc.Open();
 
                 //Aggiungo la cover
@@ -104,6 +142,17 @@ namespace PDFUnisci
 
                 reader.Close();
             }
+            catch(Exception e)
+            {
+                LogHelper.Log(e.ToString(), LogType.Error);
+            }
+            finally
+            {
+                pdf?.Dispose();
+                doc?.Dispose();
+                stream?.Dispose();
+            }
+
         }
 
         public static void SplitPDF(string InFiles, string OutDir)
@@ -115,8 +164,12 @@ namespace PDFUnisci
 
             LogHelper.Log("Divido il file in tanti PDF singoli", LogType.Successful);
 
-            using (iTextSharp.text.pdf.PdfReader reader = new iTextSharp.text.pdf.PdfReader(InFiles))
+            PdfReader reader = null;
+
+            try
             {
+                reader = new PdfReader(InFiles);
+
                 int NumPages = reader.NumberOfPages;
 
                 int digitN = NumPages.ToString().Length;
@@ -135,12 +188,19 @@ namespace PDFUnisci
                     PdfImportedPage page = pdf.GetImportedPage(reader, i);
                     pdf.AddPage(page);
 
-                    pdf.FreeReader(reader);
-                    pdf.Close();
-                    stream.Close();
+                    pdf.Dispose();
+                    doc.Dispose();
+                    stream.Dispose();
                 }
 
-                reader.Close();
+            }
+            catch(Exception e)
+            {
+                LogHelper.Log(e.ToString(), LogType.Error);
+            }
+            finally
+            {
+                reader?.Dispose();
             }
         }
     }
