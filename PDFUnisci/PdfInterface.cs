@@ -44,23 +44,8 @@ namespace PDFUnisci
             } 
         }
         
-        static string Contain(List<string> files, string outFile, int start)
+        public static void MergePDF(List<string> files, string OutFile)
         {
-            string OutFile = new Uri(outFile).ToString().Replace("file:///", "");
-
-            if (files.Contains(OutFile))
-                OutFile = OutFile.Replace(".pdf", $"({start}).pdf");
-
-            if (files.Contains(OutFile))
-                OutFile = Contain(files, OutFile, start+1);
-
-            return OutFile;
-        }
-
-        public static void MergePDF(List<string> files, string outFile)
-        {
-
-            string OutFile = outFile;
 
             LogHelper.Log("Unisco tutti i file in un unico PDF", LogType.Successful);
 
