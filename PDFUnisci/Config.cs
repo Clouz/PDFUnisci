@@ -29,23 +29,23 @@ namespace PDFUnisci
             try
             {
                 config = XDocument.Load(System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location) + "\\config.xml");
-                System.Console.WriteLine("Il file config.xml è stato letto correttamente");
+                System.Console.WriteLine("The configuration file has been read correctly");
             }
             catch (System.IO.FileNotFoundException)
             {
                 config = new XDocument(
                     new XComment("PDFUnisci config"),
                     new XElement("config",
-                        new XComment("Indica il numero di digit quando si divide un PDF"),
+                        new XComment("It indicates the number of digits when you divide a PDF"),
                         new XElement($"{nameof(PDFInterface.DefaultDigit)}", PDFInterface.DefaultDigit),
-                        new XComment("Il programma rimane aperto fino alla pressione di un tasto"),
+                        new XComment("The program will remain open until you press any key"),
                         new XElement($"{nameof(ExitConfirmation)}", ExitConfirmation),
-                        new XComment("Se impostato a zero disattiva la funziona per sostituire la cover"),
+                        new XComment("If set to zero disables the function to replace the cover"),
                         new XElement($"{nameof(PDFInterface.CoverFunction)}", PDFInterface.CoverFunction)));
                 config.Declaration = new XDeclaration("1.0", "utf-8", "true");
                 config.Save(System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location) + "\\config.xml");
 
-                System.Console.WriteLine("Il file config.xml non è stato trovato, verrà creato");
+                System.Console.WriteLine("The config.xml file is not found, it will create");
             }
 
             

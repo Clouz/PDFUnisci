@@ -22,7 +22,7 @@ namespace PDFUnisci
                 if (File.Exists(file) && Path.GetExtension(file).ToLower() == ".pdf") 
                     Files.Add(file);
                 else 
-                    LogHelper.Log($"Il file selezionato non esiste o non è un pdf, quindi verrà escluso. {file}", LogType.Error);
+                    LogHelper.Log($"The selected file does not exist or is not a PDF, and will be excluded. {file}", LogType.Error);
             }
 
             Files.Sort();
@@ -53,7 +53,7 @@ namespace PDFUnisci
 
 			if (Config.ExitConfirmation == 1)
 			{
-				Console.Write("\nPremere invio per chiudere...");
+				Console.Write("\nPress enter to close...");
 				Console.Read();
 			}
         }

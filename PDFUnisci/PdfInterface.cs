@@ -47,7 +47,7 @@ namespace PDFUnisci
         public static void MergePDF(List<string> files, string OutFile)
         {
 
-            LogHelper.Log("Unisco tutti i file in un unico PDF", LogType.Successful);
+            LogHelper.Log("I join all files into a single PDF", LogType.Successful);
 
             FileStream stream = null;
             Document doc = null;
@@ -64,7 +64,7 @@ namespace PDFUnisci
                 foreach (string file in files)
                 {
                     //todo: approfondire crash
-                    LogHelper.Log($"Aggiungo il file: {file}");
+                    LogHelper.Log($"Add the file: {file}");
                     pdf.AddDocument(new iTextSharp.text.pdf.PdfReader(file));
                 }
             }
@@ -94,7 +94,7 @@ namespace PDFUnisci
                 return;
             }
 
-            LogHelper.Log("Sostituisco la cover al file originario", LogType.Successful);
+            LogHelper.Log("I replace the cover to the original file", LogType.Successful);
 
             FileStream stream = null;
             Document doc = null;
@@ -112,7 +112,7 @@ namespace PDFUnisci
                 iTextSharp.text.pdf.PdfReader reader = new iTextSharp.text.pdf.PdfReader(InCover);
                 int coverPage = reader.NumberOfPages;
 
-                LogHelper.Log($"Aggiungo la cover: {InCover} di {coverPage} pagine");
+                LogHelper.Log($"Add the cover: {InCover} of {coverPage} pages");
                 pdf.AddDocument(reader);
                 reader.Close();
 
@@ -122,7 +122,7 @@ namespace PDFUnisci
                 coverPage++;
                 List<int> pages = Enumerable.Range(coverPage, count - coverPage + 1).ToList();
 
-                LogHelper.Log($"Aggiungo il file: {InFile} da pagina: {coverPage}");
+                LogHelper.Log($"Add the file: {InFile} from Page: {coverPage}");
                 pdf.AddDocument(reader, pages);
 
                 reader.Close();
@@ -144,10 +144,10 @@ namespace PDFUnisci
         {
             string outFiles = OutDir + Path.AltDirectorySeparatorChar + Path.GetFileNameWithoutExtension(InFiles);
 
-            LogHelper.Log($"Creo la directory in: {OutDir}");
+            LogHelper.Log($"I create the directory: {OutDir}");
             Directory.CreateDirectory(OutDir);
 
-            LogHelper.Log("Divido il file in tanti PDF singoli", LogType.Successful);
+            LogHelper.Log("I split the file into individual PDF", LogType.Successful);
 
             PdfReader reader = null;
 
@@ -165,7 +165,7 @@ namespace PDFUnisci
                     string outFile = string.Format("{0}_Page {1:D" + digitN + "}.pdf", outFiles, i);
                     FileStream stream = new FileStream(outFile, FileMode.Create);
 
-                    LogHelper.Log($"Pagina: {Path.GetFileNameWithoutExtension(outFile)}");
+                    LogHelper.Log($"Page: {Path.GetFileNameWithoutExtension(outFile)}");
                     Document doc = new Document();
                     PdfCopy pdf = new PdfCopy(doc, stream);
 
