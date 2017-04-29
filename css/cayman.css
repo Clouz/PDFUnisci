@@ -131,8 +131,8 @@ body { padding: 0; margin: 0; font-family: "Open Sans", "Helvetica Neue", Helvet
 a { color: #1e6bb8; text-decoration: none; }
 a:hover { text-decoration: underline; }
 
-.btn { display: inline-block; margin-bottom: 1rem; color: #fff; background-color: #337ab7; border-color: #2e6da4; border-style: solid; border-width: 1px; border-radius: 0.3rem; transition: color 0.2s, background-color 0.2s, border-color 0.2s; }
- .btn:hover { text-decoration: none; background-color: #306fa5}
+.btn { display: inline-block; margin-bottom: 1rem; color: #333; background-color: #fff; border-color: #ccc; border-style: solid; border-width: 1px; border-radius: 0.3rem; transition: color 0.2s, background-color 0.2s, border-color 0.2s; }
+ .btn:hover { text-decoration: none; background-color: #ccc  }
 .btn + .btn { margin-left: 1rem; }
 @media screen and (min-width: 64em) { .btn { padding: 0.75rem 1rem; } }
 @media screen and (min-width: 42em) and (max-width: 64em) { .btn { padding: 0.6rem 0.9rem; font-size: 0.9rem; } }
