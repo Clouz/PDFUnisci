@@ -9,7 +9,7 @@ Download link: [https://github.com/Clouz/PDFUnisci/releases](https://github.com/
 3. Select 'Send to' and then 'PDFUnisci';
 4. The PDF will now be joined.
 
-![PDF Merge](/images/PDFUnisci_Merge.gif)
+![PDF Merge](/docs/images/PDFUnisci_Merge.gif)
 
 
 ## How to split PDF
@@ -18,7 +18,7 @@ Download link: [https://github.com/Clouz/PDFUnisci/releases](https://github.com/
 3. Select 'Send to' and then 'PDFUnisci';
 4. The PDF will now be split into a dedicated folder.
 
-![PDF Slit](/images/PDFUnisci_Split.gif)
+![PDF Slit](/docs/images/PDFUnisci_Split.gif)
 
 ## How to install PDFUnisci
 1. Copy the files to a folder as you like;
@@ -26,7 +26,7 @@ Download link: [https://github.com/Clouz/PDFUnisci/releases](https://github.com/
 3. Type 'y' to create the link in 'send to';
 4. Now you can use PDFUnisci.
 
-![PDFUnisci install](/images/PDFUnisci_Install.gif)
+![PDFUnisci install](/docs/images/PDFUnisci_Install.gif)
 
 ## How to uninstall PDFUnisci
 1. Double click on PDFUnisci;

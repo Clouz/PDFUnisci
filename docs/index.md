@@ -1,8 +1,3 @@
-# PDFUnisci
-Merge and split PDF with a simple right click using itextsharp.
-
-Download link: [https://github.com/Clouz/PDFUnisci/releases](https://github.com/Clouz/PDFUnisci/releases)
-
 ## How to merge PDF
 1. Select all of the PDF;
 2. Right click on one of them;
