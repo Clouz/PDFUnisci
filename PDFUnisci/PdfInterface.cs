@@ -208,6 +208,10 @@ namespace PDFUnisci
 
         private static void AddBookmarks(List<string> files, PdfCopy OutFile)
         {
+            //{[Title, pagina uno]}
+            //{[Page, 1 XYZ 0 0 null]}
+            //{[Action, GoTo]}
+
             // Create a list for the bookmarks
             List<Dictionary<String, Object>> bookmarks =  new List<Dictionary<String, Object>>();
 
@@ -215,15 +219,22 @@ namespace PDFUnisci
 
             PdfReader reader = null;
 
+            PdfOutline outline = null;
+
             try
             {
                 for (int i = 0; i < files.Count; i++)
                 {
                     reader = new PdfReader(files[i]);
 
+                    
+                    
+
                     // merge the bookmarks
                     IList<Dictionary<String, Object>> tmp = SimpleBookmark.GetBookmark(reader);
+                    
                     SimpleBookmark.ShiftPageNumbers(tmp, page_offset, null);
+                    
 
                     foreach (var d in tmp) bookmarks.Add(d);
                 
@@ -235,6 +246,8 @@ namespace PDFUnisci
 
                 // Add the merged bookmarks
                 OutFile.Outlines = bookmarks;
+                OutFile.Outlines.Add(new List<Dictionary<String, Object>>() { new Dictionary<string, object>() {"","" } });
+
                 LogHelper.Log("Bookmarks copied successfully", LogType.Successful);
             }
             catch (Exception e)
