@@ -19,9 +19,22 @@ namespace PDFUnisci
 
             foreach (var file in args)
             {
-                if (File.Exists(file) && Path.GetExtension(file).ToLower() == ".pdf") 
+                if (file.StartsWith("-"))
+                {
+                    switch (file.ToLower())
+                    {
+                        case "-b":
+                            PDFInterface.Bookmarks = 1;
+                            break;
+
+                        default:
+                            LogHelper.Log($"The argument option does not exist will be excluded. {file}", LogType.Error);
+                            break;
+                    }
+                }
+                else if (File.Exists(file) && Path.GetExtension(file).ToLower() == ".pdf")
                     Files.Add(file);
-                else 
+                else
                     LogHelper.Log($"The selected file does not exist or is not a PDF, and will be excluded. {file}", LogType.Error);
             }
 

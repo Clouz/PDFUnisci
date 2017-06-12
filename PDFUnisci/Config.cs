@@ -55,6 +55,7 @@ namespace PDFUnisci
             PDFInterface.DefaultDigit = ReadConfig(PDFInterface.DefaultDigit, nameof(PDFInterface.DefaultDigit));
             ExitConfirmation = ReadConfig(ExitConfirmation, nameof(ExitConfirmation));
             PDFInterface.CoverFunction = ReadConfig(PDFInterface.CoverFunction, nameof(PDFInterface.CoverFunction));
+            PDFInterface.Bookmarks = ReadConfig(PDFInterface.Bookmarks, nameof(PDFInterface.Bookmarks)); ;
         }
 
         static int ReadConfig(int option, string nameof)

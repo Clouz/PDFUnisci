@@ -211,7 +211,8 @@ namespace PDFUnisci
             //{[Title, pagina uno]}
             //{[Page, 1 XYZ 0 0 null]}
             //{[Action, GoTo]}
-
+            //{[Kids, System.Collections.Generic.List`1[System.Collections.Generic.Dictionary`2[System.String,System.Object]]]}
+            
             // Create a list for the bookmarks
             List<Dictionary<String, Object>> bookmarks =  new List<Dictionary<String, Object>>();
 
@@ -219,24 +220,38 @@ namespace PDFUnisci
 
             PdfReader reader = null;
 
-            PdfOutline outline = null;
-
             try
             {
                 for (int i = 0; i < files.Count; i++)
                 {
                     reader = new PdfReader(files[i]);
 
-                    
-                    
-
                     // merge the bookmarks
                     IList<Dictionary<String, Object>> tmp = SimpleBookmark.GetBookmark(reader);
                     
                     SimpleBookmark.ShiftPageNumbers(tmp, page_offset, null);
-                    
 
-                    foreach (var d in tmp) bookmarks.Add(d);
+                    if (Bookmarks == 1)
+                    {
+                        tmp = new List<Dictionary<String, Object>>() {
+                            new Dictionary<string, object>()
+                            {
+                                ["Title"] = $"{Path.GetFileNameWithoutExtension(files[i])}",
+                                ["Page"] = $"{page_offset+1}",
+                                ["Action"] = "GoTo",
+                                ["Kids"] = tmp
+                            }
+                        };
+                    }
+
+
+                    if (tmp != null)
+                    {
+                        foreach (var d in tmp)
+                        {
+                                bookmarks.Add(d);
+                        }
+                     }
                 
                     // add the pages
                     int n = reader.NumberOfPages;
@@ -246,7 +261,6 @@ namespace PDFUnisci
 
                 // Add the merged bookmarks
                 OutFile.Outlines = bookmarks;
-                OutFile.Outlines.Add(new List<Dictionary<String, Object>>() { new Dictionary<string, object>() {"","" } });
 
                 LogHelper.Log("Bookmarks copied successfully", LogType.Successful);
             }
