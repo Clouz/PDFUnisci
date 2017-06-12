@@ -142,6 +142,8 @@ namespace PDFUnisci
                 pdf.AddDocument(reader, pages);
 
                 reader.Close();
+
+                AddBookmarks(InFile, pdf);
             }
             catch(Exception e)
             {
@@ -272,6 +274,12 @@ namespace PDFUnisci
             {
                 reader?.Dispose();
             }
+        }
+
+        private static void AddBookmarks(string file, PdfCopy OutFile) {
+            List<string> files = new List<string>() { file };
+
+            AddBookmarks(files, OutFile);
         }
     }
 }
