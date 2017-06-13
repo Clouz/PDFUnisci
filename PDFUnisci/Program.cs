@@ -17,9 +17,10 @@ namespace PDFUnisci
             //leggo il file di configurazione
 			Config.LeggiXML();
 
+            
             foreach (var file in args)
             {
-                if (file.StartsWith("-"))
+                if (file.StartsWith("-") && !File.Exists(file))
                 {
                     switch (file.ToLower())
                     {
