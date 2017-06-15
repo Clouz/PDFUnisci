@@ -43,7 +43,22 @@ namespace PDFUnisci
                 else _CoverFunction = 0;
             } 
         }
-        
+
+        static int _Bookmarks = 0;
+        public static int Bookmarks
+        {
+            get
+            {
+                return _Bookmarks;
+            }
+
+            set
+            {
+                if (value >= 1) _Bookmarks = 1;
+                else _Bookmarks = 0;
+            }
+        }
+
         public static void MergePDF(List<string> files, string OutFile)
         {
 
@@ -63,10 +78,11 @@ namespace PDFUnisci
 
                 foreach (string file in files)
                 {
-                    //todo: approfondire crash
                     LogHelper.Log($"Add the file: {file}");
                     pdf.AddDocument(new iTextSharp.text.pdf.PdfReader(file));
                 }
+
+                AddBookmarks(files, pdf);
             }
             catch (Exception e)
             {
@@ -94,7 +110,7 @@ namespace PDFUnisci
                 return;
             }
 
-            LogHelper.Log("I replace the cover to the original file", LogType.Successful);
+            LogHelper.Log("Replace the cover to the original file", LogType.Successful);
 
             FileStream stream = null;
             Document doc = null;
@@ -126,6 +142,8 @@ namespace PDFUnisci
                 pdf.AddDocument(reader, pages);
 
                 reader.Close();
+
+                AddBookmarks(InFile, pdf);
             }
             catch(Exception e)
             {
@@ -187,6 +205,81 @@ namespace PDFUnisci
             {
                 reader?.Dispose();
             }
+        }
+
+
+        private static void AddBookmarks(List<string> files, PdfCopy OutFile)
+        {
+            //{[Title, pagina uno]}
+            //{[Page, 1 XYZ 0 0 null]}
+            //{[Action, GoTo]}
+            //{[Kids, System.Collections.Generic.List`1[System.Collections.Generic.Dictionary`2[System.String,System.Object]]]}
+            
+            // Create a list for the bookmarks
+            List<Dictionary<String, Object>> bookmarks =  new List<Dictionary<String, Object>>();
+
+            int page_offset = 0;
+
+            PdfReader reader = null;
+
+            try
+            {
+                for (int i = 0; i < files.Count; i++)
+                {
+                    reader = new PdfReader(files[i]);
+
+                    // merge the bookmarks
+                    IList<Dictionary<String, Object>> tmp = SimpleBookmark.GetBookmark(reader);
+                    
+                    SimpleBookmark.ShiftPageNumbers(tmp, page_offset, null);
+
+                    if (Bookmarks == 1)
+                    {
+                        tmp = new List<Dictionary<String, Object>>() {
+                            new Dictionary<string, object>()
+                            {
+                                ["Title"] = $"{Path.GetFileNameWithoutExtension(files[i])}",
+                                ["Page"] = $"{page_offset+1}",
+                                ["Action"] = "GoTo",
+                                ["Kids"] = tmp
+                            }
+                        };
+                    }
+
+
+                    if (tmp != null)
+                    {
+                        foreach (var d in tmp)
+                        {
+                                bookmarks.Add(d);
+                        }
+                     }
+                
+                    // add the pages
+                    int n = reader.NumberOfPages;
+
+                    page_offset += n;
+                }
+
+                // Add the merged bookmarks
+                OutFile.Outlines = bookmarks;
+
+                LogHelper.Log("Bookmarks copied successfully", LogType.Successful);
+            }
+            catch (Exception e)
+            {
+                LogHelper.Log(e.ToString(), LogType.Error);
+            }
+            finally
+            {
+                reader?.Dispose();
+            }
+        }
+
+        private static void AddBookmarks(string file, PdfCopy OutFile) {
+            List<string> files = new List<string>() { file };
+
+            AddBookmarks(files, OutFile);
         }
     }
 }

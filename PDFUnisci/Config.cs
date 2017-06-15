@@ -41,7 +41,9 @@ namespace PDFUnisci
                         new XComment("The program will remain open until you press any key"),
                         new XElement($"{nameof(ExitConfirmation)}", ExitConfirmation),
                         new XComment("If set to zero disables the function to replace the cover"),
-                        new XElement($"{nameof(PDFInterface.CoverFunction)}", PDFInterface.CoverFunction)));
+                        new XElement($"{nameof(PDFInterface.CoverFunction)}", PDFInterface.CoverFunction),
+                        new XComment("If set to zero disables the function to add Bookmarks when merge PDF"),
+                        new XElement($"{nameof(PDFInterface.Bookmarks)}", PDFInterface.Bookmarks)));
                 config.Declaration = new XDeclaration("1.0", "utf-8", "true");
                 config.Save(System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location) + "\\config.xml");
 
@@ -53,6 +55,7 @@ namespace PDFUnisci
             PDFInterface.DefaultDigit = ReadConfig(PDFInterface.DefaultDigit, nameof(PDFInterface.DefaultDigit));
             ExitConfirmation = ReadConfig(ExitConfirmation, nameof(ExitConfirmation));
             PDFInterface.CoverFunction = ReadConfig(PDFInterface.CoverFunction, nameof(PDFInterface.CoverFunction));
+            PDFInterface.Bookmarks = ReadConfig(PDFInterface.Bookmarks, nameof(PDFInterface.Bookmarks)); ;
         }
 
         static int ReadConfig(int option, string nameof)

@@ -12,8 +12,7 @@
     <ProjectView>ProjectFiles</ProjectView>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
-    <StartArguments>
-    </StartArguments>
+    <StartArguments>"C:/Users/V082/Desktop/Nuova cartella %284%29/a.pdf" "C:/Users/V082/Desktop/Nuova cartella %284%29/b.pdf" "C:/Users/V082/Desktop/Nuova cartella %284%29/c"</StartArguments>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
     <StartArguments>"C:/Users/claud/Downloads/emacs %281%29.pdf"</StartArguments>
