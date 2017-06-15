@@ -12,31 +12,48 @@ namespace PDFUnisci
 		static void Main(string[] args)
         {
             List<string> Files = new List<string>();
+            List<string> argsL = args.ToList();
+
             string Cover = null;
 
             //leggo il file di configurazione
 			Config.LeggiXML();
 
-            
-            foreach (var file in args)
+            for (int i = 0; i < argsL.Count; i++)
             {
-                if (file.StartsWith("-") && !File.Exists(file))
+                if (File.Exists(argsL[i]))
                 {
-                    switch (file.ToLower())
+                    //FileAttributes f = File.GetAttributes(file);
+
+                    if (Path.GetExtension(argsL[i]).ToLower() == ".pdf")
+                    {
+                        Files.Add(argsL[i]);
+                    }
+                    else
+                    {
+                        LogHelper.Log($"The selected file is not a PDF, and will be excluded. {argsL[i]}", LogType.Error);
+                    }
+                }
+                else if (Directory.Exists(argsL[i]))
+                {
+                    foreach (var item in Directory.EnumerateFiles(argsL[i]))
+                    {
+                        argsL.Add(item);
+                    }
+                }
+                else
+                {
+                    switch (argsL[i].ToLower())
                     {
                         case "-b":
                             PDFInterface.Bookmarks = 1;
                             break;
 
                         default:
-                            LogHelper.Log($"The argument option does not exist will be excluded. {file}", LogType.Error);
+                            LogHelper.Log($"The argument option does not exist will be excluded. {argsL[i]}", LogType.Error);
                             break;
                     }
                 }
-                else if (File.Exists(file) && Path.GetExtension(file).ToLower() == ".pdf")
-                    Files.Add(file);
-                else
-                    LogHelper.Log($"The selected file does not exist or is not a PDF, and will be excluded. {file}", LogType.Error);
             }
 
             Files.Sort();
