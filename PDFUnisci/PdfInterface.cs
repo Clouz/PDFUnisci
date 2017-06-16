@@ -62,7 +62,7 @@ namespace PDFUnisci
         public static void MergePDF(List<string> files, string OutFile)
         {
 
-            LogHelper.Log("I join all files into a single PDF", LogType.Successful);
+            LogHelper.Log("Join all files into a single PDF", LogType.Successful);
 
             FileStream stream = null;
             Document doc = null;
@@ -282,23 +282,29 @@ namespace PDFUnisci
             AddBookmarks(files, OutFile);
         }
 
-        public static void ImgToPDF(string ImgFile)
+        public static void ImgToPDF(List<string> files, string OutFile)
         {
+            LogHelper.Log("Join all immages into a single PDF", LogType.Successful);
+                      
 
-            var img = iTextSharp.text.Image.GetInstance(ImgFile);
-
-            using (Document doc = new Document(img))
+            using (Document doc = new Document())
             {
-                doc.SetPageSize(new iTextSharp.text.Rectangle(0, 0, img.Width, img.Height, 0));
-                doc.NewPage();
-
-                using (FileStream fs = new FileStream(output, FileMode.Create, FileAccess.Write, FileShare.None))
+                using (FileStream fs = new FileStream(OutFile, FileMode.Create, FileAccess.Write, FileShare.None))
                 {
                     using (PdfWriter writer = PdfWriter.GetInstance(doc, fs))
                     {
                         doc.Open();
-                        img.SetAbsolutePosition(0, 0);
-                        writer.DirectContent.AddImage(img);
+
+                        foreach (var ImgFile in files)
+                        { 
+                            Image img = iTextSharp.text.Image.GetInstance(ImgFile);
+                            doc.SetPageSize(new iTextSharp.text.Rectangle(0, 0, img.Width, img.Height, 0));
+                            doc.NewPage();
+
+                            img.SetAbsolutePosition(0, 0);
+                            writer.DirectContent.AddImage(img);
+                        }
+
                         doc.Close();
                     }
                 }

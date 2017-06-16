@@ -11,8 +11,9 @@ namespace PDFUnisci
 	{
 		static void Main(string[] args)
         {
-            List<string> Files = new List<string>();
             List<string> argsL = args.ToList();
+            List<string> Files = new List<string>();
+            List<string> Images = new List<string>();
 
             string Cover = null;
 
@@ -28,6 +29,10 @@ namespace PDFUnisci
                     if (Path.GetExtension(argsL[i]).ToLower() == ".pdf")
                     {
                         Files.Add(argsL[i]);
+                    }
+                    else if (Path.GetExtension(argsL[i]).ToLower() == ".png")
+                    {
+                        Images.Add(argsL[i]);
                     }
                     else
                     {
@@ -57,6 +62,7 @@ namespace PDFUnisci
             }
 
             Files.Sort();
+            Images.Sort();
 
             if(Files.Count() == 2)
             {
@@ -68,18 +74,27 @@ namespace PDFUnisci
 
             string OutFileName = $"{Path.GetDirectoryName(Files.FirstOrDefault())}{Path.DirectorySeparatorChar}{Path.GetFileNameWithoutExtension(Files.FirstOrDefault())}";
 
-            switch (Files.Count)
+            if (Images != null)
             {
-                case 0:
-                    Menu.Create();
-                    break;
-                case 1:
-                    if(Cover == null) PDFInterface.SplitPDF(Files.FirstOrDefault(), $"{OutFileName}_split");
-                    else PDFInterface.ReplaceCoverPDF(Files.FirstOrDefault(), Cover, $"{OutFileName}_merged.pdf");
-                    break;
-                default:
-                    PDFInterface.MergePDF(Files, $"{OutFileName}_merged.pdf");
-                    break;
+                string OutFileNameImg = $"{Path.GetDirectoryName(Images.FirstOrDefault())}{Path.DirectorySeparatorChar}{Path.GetFileNameWithoutExtension(Images.FirstOrDefault())}";
+
+                PDFInterface.ImgToPDF(Images, $"{OutFileNameImg}_merged.pdf");
+            }
+            else
+            {
+                switch (Files.Count)
+                {
+                    case 0:
+                        Menu.Create();
+                        break;
+                    case 1:
+                        if(Cover == null) PDFInterface.SplitPDF(Files.FirstOrDefault(), $"{OutFileName}_split");
+                        else PDFInterface.ReplaceCoverPDF(Files.FirstOrDefault(), Cover, $"{OutFileName}_merged.pdf");
+                        break;
+                    default:
+                        PDFInterface.MergePDF(Files, $"{OutFileName}_merged.pdf");
+                        break;
+                }
             }
 
 			if (Config.ExitConfirmation == 1)
