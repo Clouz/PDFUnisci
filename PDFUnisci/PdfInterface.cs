@@ -281,5 +281,28 @@ namespace PDFUnisci
 
             AddBookmarks(files, OutFile);
         }
+
+        public static void ImgToPDF(string ImgFile)
+        {
+
+            var img = iTextSharp.text.Image.GetInstance(ImgFile);
+
+            using (Document doc = new Document(img))
+            {
+                doc.SetPageSize(new iTextSharp.text.Rectangle(0, 0, img.Width, img.Height, 0));
+                doc.NewPage();
+
+                using (FileStream fs = new FileStream(output, FileMode.Create, FileAccess.Write, FileShare.None))
+                {
+                    using (PdfWriter writer = PdfWriter.GetInstance(doc, fs))
+                    {
+                        doc.Open();
+                        img.SetAbsolutePosition(0, 0);
+                        writer.DirectContent.AddImage(img);
+                        doc.Close();
+                    }
+                }
+            }
+        }
     }
 }
