@@ -285,29 +285,40 @@ namespace PDFUnisci
         public static void ImgToPDF(List<string> files, string OutFile)
         {
             LogHelper.Log("Join all immages into a single PDF", LogType.Successful);
-                      
 
-            using (Document doc = new Document())
+            Document doc = null;
+            FileStream fs = null;
+            PdfWriter writer = null;
+
+            try
             {
-                using (FileStream fs = new FileStream(OutFile, FileMode.Create, FileAccess.Write, FileShare.None))
+                doc = new Document();
+                fs = new FileStream(OutFile, FileMode.Create, FileAccess.Write, FileShare.None);
+                writer = PdfWriter.GetInstance(doc, fs);
+
+                doc.Open();
+
+                foreach (var ImgFile in files)
                 {
-                    using (PdfWriter writer = PdfWriter.GetInstance(doc, fs))
-                    {
-                        doc.Open();
+                    LogHelper.Log($"Add the file: {ImgFile}");
 
-                        foreach (var ImgFile in files)
-                        { 
-                            Image img = iTextSharp.text.Image.GetInstance(ImgFile);
-                            doc.SetPageSize(new iTextSharp.text.Rectangle(0, 0, img.Width, img.Height, 0));
-                            doc.NewPage();
+                    Image img = iTextSharp.text.Image.GetInstance(ImgFile);
+                    doc.SetPageSize(new iTextSharp.text.Rectangle(0, 0, img.Width, img.Height, 0));
+                    doc.NewPage();
 
-                            img.SetAbsolutePosition(0, 0);
-                            writer.DirectContent.AddImage(img);
-                        }
-
-                        doc.Close();
-                    }
+                    img.SetAbsolutePosition(0, 0);
+                    writer.DirectContent.AddImage(img);
                 }
+            }
+            catch (Exception e)
+            {
+                LogHelper.Log(e.ToString(), LogType.Error);
+            }
+            finally
+            {
+                doc?.Dispose();
+                fs?.Dispose();
+                writer?.Dispose();
             }
         }
     }
