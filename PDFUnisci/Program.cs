@@ -24,13 +24,11 @@ namespace PDFUnisci
             {
                 if (File.Exists(argsL[i]))
                 {
-                    //FileAttributes f = File.GetAttributes(file);
-
                     if (Path.GetExtension(argsL[i]).ToLower() == ".pdf")
                     {
                         Files.Add(argsL[i]);
                     }
-                    else if (Path.GetExtension(argsL[i]).ToLower() == ".png")
+                    else if (Path.GetExtension(argsL[i]).ToLower() == ".png" || Path.GetExtension(argsL[i]).ToLower() == ".jpg")
                     {
                         Images.Add(argsL[i]);
                     }
@@ -74,11 +72,11 @@ namespace PDFUnisci
 
             string OutFileName = $"{Path.GetDirectoryName(Files.FirstOrDefault())}{Path.DirectorySeparatorChar}{Path.GetFileNameWithoutExtension(Files.FirstOrDefault())}";
 
-            if (Images != null)
+            if (Images.Count > 0)
             {
                 string OutFileNameImg = $"{Path.GetDirectoryName(Images.FirstOrDefault())}{Path.DirectorySeparatorChar}{Path.GetFileNameWithoutExtension(Images.FirstOrDefault())}";
 
-                PDFInterface.ImgToPDF(Images, $"{OutFileNameImg}_merged.pdf");
+                PDFInterface.ImgToPDF(Images, $"{OutFileNameImg}_ImgMerged.pdf");
             }
             else
             {
