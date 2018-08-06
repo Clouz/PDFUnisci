@@ -16,6 +16,7 @@ namespace PDFUnisci
             List<string> Images = new List<string>();
 
             string Cover = null;
+            bool flat = false;
 
             //leggo il file di configurazione
 			Config.LeggiXML();
@@ -28,7 +29,7 @@ namespace PDFUnisci
                     {
                         Files.Add(argsL[i]);
                     }
-                    else if (Path.GetExtension(argsL[i]).ToLower() == ".png" || Path.GetExtension(argsL[i]).ToLower() == ".jpg")
+                    else if (Path.GetExtension(argsL[i]).ToLower() == ".png" || Path.GetExtension(argsL[i]).ToLower() == ".jpg" || Path.GetExtension(argsL[i]).ToLower() == ".jpeg")
                     {
                         Images.Add(argsL[i]);
                     }
@@ -43,6 +44,10 @@ namespace PDFUnisci
                     {
                         argsL.Add(item);
                     }
+                }
+                else if (argsL[i] == "-flat")
+                {
+                    flat = true;
                 }
                 else
                 {
@@ -77,6 +82,10 @@ namespace PDFUnisci
                 string OutFileNameImg = $"{Path.GetDirectoryName(Images.FirstOrDefault())}{Path.DirectorySeparatorChar}{Path.GetFileNameWithoutExtension(Images.FirstOrDefault())}";
 
                 PDFInterface.ImgToPDF(Images, $"{OutFileNameImg}_ImgMerged.pdf");
+            }
+            else if(flat)
+            {
+                PDFInterface.FlatPDF(Files.FirstOrDefault(), $"{OutFileName}_flat.pdf");
             }
             else
             {

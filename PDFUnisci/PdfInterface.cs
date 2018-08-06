@@ -321,5 +321,42 @@ namespace PDFUnisci
                 writer?.Dispose();
             }
         }
+
+        public static void FlatPDF(string file, string OutFile)
+        {
+            LogHelper.Log("Flatt all PDF comments", LogType.Successful);
+
+            using (FileStream stream = new FileStream(OutFile, FileMode.Create))
+            {
+                PdfReader reader = null;
+                PdfStamper stamper = null;
+                try
+                {
+                    reader = new PdfReader(file);
+                    stamper = new PdfStamper(reader, stream)
+                    {
+                        FormFlattening = true,
+                        AnnotationFlattening = true,
+                        FreeTextFlattening = true,
+                    };
+                    if(stamper.AcroFields != null)
+                    {
+                        stamper.AcroFields.GenerateAppearances = true;
+                    }
+
+                }
+                catch (Exception e)
+                {
+                    LogHelper.Log(e.ToString(), LogType.Error);
+
+                    reader?.Close();
+                }
+                finally
+                {
+                    stamper?.Close();
+                    reader?.Close();
+                }
+            }
+        }
     }
 }
