@@ -43,7 +43,9 @@ namespace PDFUnisci
                         new XComment("If set to zero disables the function to replace the cover"),
                         new XElement($"{nameof(PDFInterface.CoverFunction)}", PDFInterface.CoverFunction),
                         new XComment("If set to zero disables the function to add Bookmarks when merge PDF"),
-                        new XElement($"{nameof(PDFInterface.Bookmarks)}", PDFInterface.Bookmarks)));
+                        new XElement($"{nameof(PDFInterface.Bookmarks)}", PDFInterface.Bookmarks),
+                        new XComment("If set to one flat only first page of the PDF"),
+                        new XElement($"{nameof(PDFInterface.FlatOnlyFirstPage)}", PDFInterface.FlatOnlyFirstPage)));
                 config.Declaration = new XDeclaration("1.0", "utf-8", "true");
                 config.Save(System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location) + "\\config.xml");
 
@@ -55,7 +57,8 @@ namespace PDFUnisci
             PDFInterface.DefaultDigit = ReadConfig(PDFInterface.DefaultDigit, nameof(PDFInterface.DefaultDigit));
             ExitConfirmation = ReadConfig(ExitConfirmation, nameof(ExitConfirmation));
             PDFInterface.CoverFunction = ReadConfig(PDFInterface.CoverFunction, nameof(PDFInterface.CoverFunction));
-            PDFInterface.Bookmarks = ReadConfig(PDFInterface.Bookmarks, nameof(PDFInterface.Bookmarks)); ;
+            PDFInterface.Bookmarks = ReadConfig(PDFInterface.Bookmarks, nameof(PDFInterface.Bookmarks));
+            PDFInterface.FlatOnlyFirstPage = ReadConfig(PDFInterface.FlatOnlyFirstPage, nameof(PDFInterface.FlatOnlyFirstPage));
         }
 
         static int ReadConfig(int option, string nameof)

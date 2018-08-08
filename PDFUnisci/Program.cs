@@ -18,8 +18,9 @@ namespace PDFUnisci
             string Cover = null;
             bool flat = false;
 
+
             //leggo il file di configurazione
-			Config.LeggiXML();
+            Config.LeggiXML();
 
             for (int i = 0; i < argsL.Count; i++)
             {
@@ -35,7 +36,7 @@ namespace PDFUnisci
                     }
                     else
                     {
-                        LogHelper.Log($"The selected file is not a PDF, and will be excluded. {argsL[i]}", LogType.Error);
+                        LogHelper.Log($"The selected file is not a PDF or valid immage format (.png | .jpg | .jpeg), and will be excluded. {argsL[i]}", LogType.Warning);
                     }
                 }
                 else if (Directory.Exists(argsL[i]))
@@ -45,16 +46,16 @@ namespace PDFUnisci
                         argsL.Add(item);
                     }
                 }
-                else if (argsL[i] == "-flat")
-                {
-                    flat = true;
-                }
                 else
                 {
                     switch (argsL[i].ToLower())
                     {
                         case "-b":
                             PDFInterface.Bookmarks = 1;
+                            break;
+
+                        case "-flat":
+                            flat = true;
                             break;
 
                         default:
@@ -67,6 +68,9 @@ namespace PDFUnisci
             Files.Sort();
             Images.Sort();
 
+            string OutFileName = $"{Path.GetDirectoryName(Files.FirstOrDefault())}{Path.DirectorySeparatorChar}{Path.GetFileNameWithoutExtension(Files.FirstOrDefault())}";
+            string OutFileNameImg = $"{Path.GetDirectoryName(Images.FirstOrDefault())}{Path.DirectorySeparatorChar}{Path.GetFileNameWithoutExtension(Images.FirstOrDefault())}";
+
             if(Files.Count() == 2)
             {
                 Cover = Files.FirstOrDefault(x => Path.GetFileNameWithoutExtension(x).ToLower().Contains("cover"));
@@ -75,24 +79,30 @@ namespace PDFUnisci
                     Files.Remove(Cover);
             }
 
-            string OutFileName = $"{Path.GetDirectoryName(Files.FirstOrDefault())}{Path.DirectorySeparatorChar}{Path.GetFileNameWithoutExtension(Files.FirstOrDefault())}";
-
-            if (Images.Count > 0)
+            if (args.Length == 0)
             {
-                string OutFileNameImg = $"{Path.GetDirectoryName(Images.FirstOrDefault())}{Path.DirectorySeparatorChar}{Path.GetFileNameWithoutExtension(Images.FirstOrDefault())}";
-
+                Menu.Create();
+            }
+            else if (Images.Count > 0)
+            {
                 PDFInterface.ImgToPDF(Images, $"{OutFileNameImg}_ImgMerged.pdf");
             }
             else if(flat)
             {
-                PDFInterface.FlatPDF(Files.FirstOrDefault(), $"{OutFileName}_flat.pdf");
+                if (PDFInterface.FlatOnlyFirstPage == 1)
+                {
+                    PDFInterface.FlatPDFonlyFistPage(Files);
+                }
+                else
+                {
+                    PDFInterface.FlatPDF(Files);
+                }
             }
             else
             {
                 switch (Files.Count)
                 {
                     case 0:
-                        Menu.Create();
                         break;
                     case 1:
                         if(Cover == null) PDFInterface.SplitPDF(Files.FirstOrDefault(), $"{OutFileName}_split");
