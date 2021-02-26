@@ -29,6 +29,7 @@ namespace PDFUnisci
             
             string sedto = Environment.GetFolderPath(Environment.SpecialFolder.SendTo);
             string collegamento = sedto + Path.DirectorySeparatorChar + "PDFUnisci.lnk";
+            string collegamento2 = sedto + Path.DirectorySeparatorChar + "PDFUnisci Flat.lnk";
 
             if (System.IO.File.Exists(collegamento)) {
                 Console.WriteLine("Do you want to delete the link to 'Send to'? [Yes, No]");
@@ -37,7 +38,15 @@ namespace PDFUnisci
 
                 if(risposta.ToLower() == "yes" || risposta.ToLower() == "y")
                 {
-                    System.IO.File.Delete(collegamento);
+                    try
+                    {
+                        System.IO.File.Delete(collegamento);
+                        System.IO.File.Delete(collegamento2);
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e);
+                    }
                     Console.Write("Link removed...");
                     Console.Read();
                 }
@@ -57,12 +66,20 @@ namespace PDFUnisci
                 {
 
                     //Creo il collegamento
-                    object shDesktop = (object)"Desktop";
+                    //object shDesktop = (object)"Desktop";
                     WshShell shell = new WshShell();
                     IWshShortcut shortcut = (IWshShortcut)shell.CreateShortcut(collegamento);
                     shortcut.Description = "Shortcut for PDFUnisci";
                     shortcut.TargetPath = System.Reflection.Assembly.GetExecutingAssembly().Location;
                     shortcut.Save();
+
+                    //Creo il collegamento2
+                    WshShell shell2 = new WshShell();
+                    IWshShortcut shortcut2 = (IWshShortcut)shell2.CreateShortcut(collegamento2);
+                    shortcut2.Description = "Shortcut for PDFUnisci flat";
+                    shortcut2.TargetPath = System.Reflection.Assembly.GetExecutingAssembly().Location;
+                    shortcut2.Arguments = "-flat";
+                    shortcut2.Save();
 
                     Console.Write("Link created...");
                     Console.Read();

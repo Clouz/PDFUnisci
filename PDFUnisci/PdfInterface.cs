@@ -59,6 +59,21 @@ namespace PDFUnisci
             }
         }
 
+        static int _FlatOnlyFirstPage = 0;
+        public static int FlatOnlyFirstPage
+        {
+            get
+            {
+                return _FlatOnlyFirstPage;
+            }
+
+            set
+            {
+                if (value >= 1) _FlatOnlyFirstPage = 1;
+                else _FlatOnlyFirstPage = 0;
+            }
+        }
+
         public static void MergePDF(List<string> files, string OutFile)
         {
 
@@ -319,6 +334,108 @@ namespace PDFUnisci
                 doc?.Dispose();
                 fs?.Dispose();
                 writer?.Dispose();
+            }
+        }
+
+        public static void FlatPDF(List<string> files)
+        {
+
+            LogHelper.Log("Flatt all PDF comments", LogType.Successful);
+
+            foreach (var file in files)
+            {
+                string OutFile = $"{Path.GetDirectoryName(file)}{Path.DirectorySeparatorChar}{Path.GetFileNameWithoutExtension(file)}_flat.pdf";
+
+                LogHelper.Log($"Flattening file: { Path.GetFileNameWithoutExtension(file)}");
+
+                using (FileStream stream = new FileStream(OutFile, FileMode.Create))
+                {
+                    PdfReader reader = null;
+                    PdfStamper stamper = null;
+                    try
+                    {
+                        reader = new PdfReader(file);
+
+                        stamper = new PdfStamper(reader, stream)
+                        {
+                            FormFlattening = true,
+                            AnnotationFlattening = true,
+                            FreeTextFlattening = true,
+                        };
+                        stamper.Close();
+                    }
+                    catch (Exception e)
+                    {
+                        LogHelper.Log(e.ToString(), LogType.Error);
+
+                        reader?.Close();
+                    }
+                    finally
+                    {
+                        reader?.Close();
+                    }
+                }
+            }
+        }
+
+
+        public static void FlatPDFonlyFistPage(List<string> files)
+        {
+
+            LogHelper.Log("Flatt all PDF comments", LogType.Successful);
+
+            foreach (var file in files)
+            {
+                string OutFile = $"{Path.GetDirectoryName(file)}{Path.DirectorySeparatorChar}{Path.GetFileNameWithoutExtension(file)}_flat.pdf";
+
+                LogHelper.Log($"Flattening file: { Path.GetFileNameWithoutExtension(file)}");
+
+                using (FileStream stream = new FileStream(OutFile, FileMode.Create))
+                {
+                    PdfReader reader = null;
+                    PdfStamper stamper = null;
+                    try
+                    {
+                        var memStream1 = new MemoryStream();
+
+                        reader = new PdfReader(file);
+                        reader.SelectPages("1");
+
+                        stamper = new PdfStamper(reader, memStream1)
+                        {
+                            FormFlattening = true,
+                            AnnotationFlattening = true,
+                            FreeTextFlattening = true,
+                        };
+                        stamper.Close();
+                        PdfReader readerfirstPage = new PdfReader(memStream1.ToArray());
+                        
+                        Document doc = new Document();
+                        PdfCopy pdf = new PdfCopy(doc, stream);
+                        doc.Open();
+                        pdf.AddDocument(readerfirstPage);
+
+                        PdfReader readerOtherPages = new PdfReader(file);
+                        if (readerOtherPages.NumberOfPages > 2)
+                        {
+                            readerOtherPages.SelectPages($"2-{readerOtherPages.NumberOfPages}");
+                            pdf.AddDocument(readerOtherPages);
+                        }
+                        doc.Close();
+                        pdf.Close();
+
+                    }
+                    catch (Exception e)
+                    {
+                        LogHelper.Log(e.ToString(), LogType.Error);
+
+                        reader?.Close();
+                    }
+                    finally
+                    {
+                        reader?.Close();
+                    }
+                }
             }
         }
     }

@@ -10,7 +10,7 @@ namespace LogManager
 
     public enum LogType 
     {
-        Error, Normal, Successful
+        Error, Normal, Successful, Warning
     }
 
     abstract class LogBase
@@ -32,6 +32,13 @@ namespace LogManager
 
                 case LogType.Error:
                 Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine(message);
+                Console.ResetColor();
+                LogHelper.ErrorLog.Add(message);
+                break;
+
+                case LogType.Warning:
+                Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.WriteLine(message);
                 Console.ResetColor();
                 LogHelper.ErrorLog.Add(message);
