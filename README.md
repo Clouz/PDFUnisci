@@ -3,6 +3,20 @@ Merge and split PDF with a simple right click using itextsharp.
 
 Download link: [https://github.com/Clouz/PDFUnisci/releases](https://github.com/Clouz/PDFUnisci/releases)
 
+## Features
+1. Split single PDF file into multiple PDF files (one for each page)
+2. Merge multiple PDF files into single file (sorted alphabetically)
+3. Convert PNG and JPG/JPEG images into PDF file
+4. FLAT alle the comments into a single PDF
+5. If 2 files ares selected and one of them contain in the filename the word Cover, the cover will be replaced.
+
+## Option:
+Default Digit = Set the number of digits into the filename when you split one PDF
+Exit Confirmation = PDFUnisci will remain open until you press any key
+Cover Function = If set to zero disables the function to replace the cover
+Bookmarks = If set to zero disables the function to add Bookmarks when merge PDF
+FlatOnlyFirstPage = If set to one FLAT only first page of the PDF
+
 ## How to merge PDF
 1. Select all of the PDF;
 2. Right click on one of them;
