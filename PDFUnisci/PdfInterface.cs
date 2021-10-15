@@ -173,7 +173,7 @@ namespace PDFUnisci
 
         }
 
-        public static void SplitPDF(string InFiles, string OutDir)
+        public static void SplitPDF(string InFiles, string OutDir, int PageN = 0)
         {
             string outFiles = OutDir + Path.AltDirectorySeparatorChar + Path.GetFileNameWithoutExtension(InFiles);
 
@@ -195,20 +195,24 @@ namespace PDFUnisci
 
                 for (int i = 1; i <= NumPages; i++)
                 {
-                    string outFile = string.Format("{0}_Page {1:D" + digitN + "}.pdf", outFiles, i);
-                    FileStream stream = new FileStream(outFile, FileMode.Create);
+                    if (PageN == 0 || PageN == i)
+                    {
+                        string outFile = string.Format("{0}_Page {1:D" + digitN + "}.pdf", outFiles, i);
+                        FileStream stream = new FileStream(outFile, FileMode.Create);
 
-                    LogHelper.Log($"Page: {Path.GetFileNameWithoutExtension(outFile)}");
-                    Document doc = new Document();
-                    PdfCopy pdf = new PdfCopy(doc, stream);
+                        LogHelper.Log($"Page: {Path.GetFileNameWithoutExtension(outFile)}");
+                        Document doc = new Document();
+                        PdfCopy pdf = new PdfCopy(doc, stream);
 
-                    doc.Open();
-                    PdfImportedPage page = pdf.GetImportedPage(reader, i);
-                    pdf.AddPage(page);
+                        doc.Open();
+                        PdfImportedPage page = pdf.GetImportedPage(reader, i);
+                        pdf.AddPage(page);
 
-                    pdf.Dispose();
-                    doc.Dispose();
-                    stream.Dispose();
+                        pdf.Dispose();
+                        doc.Dispose();
+                        stream.Dispose();
+                    }
+
                 }
 
             }

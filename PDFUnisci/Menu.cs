@@ -12,8 +12,15 @@ namespace PDFUnisci
             string AssemblyTitle = Assembly.GetExecutingAssembly().GetName().Name;
 
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine($"{AssemblyTitle} {AssemblyVersion}\nCopyright(C) 2016 by Claudio Mola\n");
+            Console.WriteLine($"{AssemblyTitle} {AssemblyVersion}\nCopyright(C) 2021 by Claudio Mola\n");
             Console.ResetColor();
+
+            Console.WriteLine("usage: PDFUnisci [options] filenames");
+            Console.WriteLine("\toptions:");
+            Console.WriteLine("\t\t-b\t\t\tAdd Bookmarks");
+            Console.WriteLine("\t\t-s\t\t\tSplit all the files in dedicated folders");
+            Console.WriteLine("\t\t-flat\t\t\tAll the comments will be flattened");
+            Console.WriteLine("\t\t-singlePageSplit\tOnly the selected page will be splitted\n");
 
             Console.WriteLine("More information: https://github.com/Clouz/PDFUnisci\n");
 

@@ -17,6 +17,8 @@ namespace PDFUnisci
 
             string Cover = null;
             bool flat = false;
+            bool splitAll = false;
+            int singlePageSplit = 0;
 
 
             //leggo il file di configurazione
@@ -54,8 +56,25 @@ namespace PDFUnisci
                             PDFInterface.Bookmarks = 1;
                             break;
 
+                        case "-s":
+                            splitAll = true;
+                            break;
+
                         case "-flat":
                             flat = true;
+                            break;
+
+                        case "-singlepagesplit":
+                            if (argsL.Count() >= i+1)
+                            {
+                                bool r = Int32.TryParse(argsL[i + 1].ToLower(), out singlePageSplit);
+                                if (!r)
+                                {
+                                    singlePageSplit = 0;
+                                    break;
+                                }
+                            }
+                            i++;
                             break;
 
                         default:
@@ -105,11 +124,23 @@ namespace PDFUnisci
                     case 0:
                         break;
                     case 1:
-                        if(Cover == null) PDFInterface.SplitPDF(Files.FirstOrDefault(), $"{OutFileName}_split");
+                        if(Cover == null) PDFInterface.SplitPDF(Files.FirstOrDefault(), $"{OutFileName}_split", singlePageSplit);
                         else PDFInterface.ReplaceCoverPDF(Files.FirstOrDefault(), Cover, $"{OutFileName}_merged.pdf");
                         break;
                     default:
-                        PDFInterface.MergePDF(Files, $"{OutFileName}_merged.pdf");
+
+                        if (splitAll)
+                        {
+                            foreach (string file in Files)
+                            {
+                                OutFileName = $"{Path.GetDirectoryName(file)}{Path.DirectorySeparatorChar}{Path.GetFileNameWithoutExtension(file)}";
+                                PDFInterface.SplitPDF(file, $"{OutFileName}_split", singlePageSplit);
+                            }
+                        }
+                        else
+                        {
+                            PDFInterface.MergePDF(Files, $"{OutFileName}_merged.pdf");
+                        }
                         break;
                 }
             }
