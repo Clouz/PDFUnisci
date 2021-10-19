@@ -2,6 +2,7 @@
 using System.IO;
 using System.Linq;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 using LogManager;
 
@@ -19,6 +20,7 @@ namespace PDFUnisci
             bool flat = false;
             bool splitAll = false;
             int singlePageSplit = 0;
+            string createNewPageFormat = null;
 
 
             //leggo il file di configurazione
@@ -52,6 +54,22 @@ namespace PDFUnisci
                 {
                     switch (argsL[i].ToLower())
                     {
+                        case "-np":
+
+                            if (argsL.Count() > i + 1)
+                            {
+                                createNewPageFormat = argsL[i + 1];
+                                i++;
+                            } else
+                            {
+                                createNewPageFormat = "A4";
+                            }
+
+                            LogHelper.Log($"Created a new Empty Page with size: {createNewPageFormat}", LogType.Normal);
+                            Config.ExitConfirmation = 0;
+
+                            break;
+
                         case "-b":
                             PDFInterface.Bookmarks = 1;
                             break;
@@ -116,6 +134,20 @@ namespace PDFUnisci
                 {
                     PDFInterface.FlatPDF(Files);
                 }
+            }
+            else if (createNewPageFormat != null)
+            {
+                //Create a new file in the temp folder with random filename
+                string fileName = System.IO.Path.GetTempPath() + Guid.NewGuid().ToString() + ".pdf";
+
+                PDFInterface.CreateEmptyPage(fileName, pageSize: createNewPageFormat);
+
+                //Open the new PDF with the default PDFeditor
+                Process fileopener = new Process();
+
+                fileopener.StartInfo.FileName = "explorer";
+                fileopener.StartInfo.Arguments = "\"" + fileName + "\"";
+                fileopener.Start();
             }
             else
             {

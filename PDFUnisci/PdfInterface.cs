@@ -173,6 +173,53 @@ namespace PDFUnisci
 
         }
 
+        public static void CreateEmptyPage(string OutFile, string pageSize = "A4", bool rotate = false)
+        {
+  
+            Rectangle ps;
+
+            switch (pageSize)
+            {
+                case "A3":
+                    ps = PageSize.A3;
+                    break;
+                case "A1":
+                    ps = PageSize.A1;
+                    break;
+                case "A0":
+                    ps = PageSize.A0;
+                    break;
+                default:
+                    ps = PageSize.A4;
+                    break;
+            }
+
+            if (rotate) {
+                ps.Rotate();
+            }
+
+            try
+            {
+                System.IO.FileStream fs = new FileStream(OutFile, FileMode.Create);
+                Document document = new Document(ps);
+                PdfWriter writer = PdfWriter.GetInstance(document, fs);
+
+                document.Open();
+
+                writer.PageEmpty = false;
+                document.NewPage();
+                document.Close();
+                writer.Close();
+                fs.Close();
+
+            }
+            catch (Exception e)
+            {
+                LogHelper.Log(e.ToString(), LogType.Error);
+            }
+
+        }
+
         public static void SplitPDF(string InFiles, string OutDir, int PageN = 0)
         {
             string outFiles = OutDir + Path.AltDirectorySeparatorChar + Path.GetFileNameWithoutExtension(InFiles);
