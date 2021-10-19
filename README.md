@@ -23,8 +23,8 @@ FlatOnlyFirstPage = If set to one FLAT only first page of the PDF
 -flat = All the comments will be flattened  
 -singlePageSplit = Only the selected page will be splitted  
 usage: -singlePageSplit page number  
--ps = Create ad open a new empty page in a temp folder  
-usage: -ps format size ("A4", "A3", "A0", "A1")  
+-np = Create ad open a new empty page in a temp folder  
+usage: -np format size ("A4", "A3", "A0", "A1")  
 
 ## How to merge PDF
 1. Select all of the PDF;
