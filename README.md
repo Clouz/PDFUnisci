@@ -17,6 +17,12 @@ Cover Function = If set to zero disables the function to replace the cover
 Bookmarks = If set to zero disables the function to add Bookmarks when merge PDF  
 FlatOnlyFirstPage = If set to one FLAT only first page of the PDF  
 
+## Flag:
+-b = Add Bookmarks  
+-s  = Split all the files in dedicated folders  
+-flat = All the comments will be flattened  
+-singlePageSplit = Only the selected page will be splitted  
+
 ## How to merge PDF
 1. Select all of the PDF;
 2. Right click on one of them;
