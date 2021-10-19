@@ -21,7 +21,7 @@ namespace PDFUnisci
             Console.WriteLine("\t\t-s\t\t\tSplit all the files in dedicated folders");
             Console.WriteLine("\t\t-flat\t\t\tAll the comments will be flattened");
             Console.WriteLine("\t\t-singlePageSplit\tOnly the selected page will be splitted");
-            Console.WriteLine("\t\t-ps\t\t\tCreate ad open a new empty page in a temp folder\n");
+            Console.WriteLine("\t\t-np\t\t\tCreate ad open a new empty page in a temp folder\n");
 
             Console.WriteLine("More information: https://github.com/Clouz/PDFUnisci\n");
 
