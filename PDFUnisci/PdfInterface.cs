@@ -12,6 +12,7 @@ using iText.Forms;
 using LogManager;
 using System.Linq;
 using System;
+using iText.Kernel.Utils;
 
 namespace PDFUnisci
 {
@@ -232,58 +233,55 @@ namespace PDFUnisci
 
         // }
 
-        // public static void SplitPDF(string InFiles, string OutDir, int PageN = 0)
-        // {
-        //     string outFiles = OutDir + Path.AltDirectorySeparatorChar + Path.GetFileNameWithoutExtension(InFiles);
+        public static void SplitPDF(string InFiles, string OutDir = "", int PageN = 0)
+        {
+            string outFiles = OutDir + Path.AltDirectorySeparatorChar + Path.GetFileNameWithoutExtension(InFiles);
 
-        //     LogHelper.Log($"I create the directory: {OutDir}");
-        //     Directory.CreateDirectory(OutDir);
+            if (OutDir != ""){
+                LogHelper.Log($"I create the directory: {OutDir}");
+                Directory.CreateDirectory(OutDir);
+            }
 
-        //     LogHelper.Log("I split the file into individual PDF", LogType.Successful);
+            LogHelper.Log("I split the file into individual PDF", LogType.Successful);
 
-        //     PdfReader reader = null;
+            try
+            {
+                PdfDocument pdfDoc = new PdfDocument(new PdfReader(InFiles));
+                IList<PdfDocument> splitDocuments = new PdfSplitter(pdfDoc).SplitByPageCount(1);
 
-        //     try
-        //     {
-        //         reader = new PdfReader(InFiles);
+                int NumPages = pdfDoc.GetNumberOfPages();
 
-        //         int NumPages = reader.NumberOfPages;
+                int digitN = NumPages.ToString().Length;
+                if (digitN < DefaultDigit) digitN = (int)DefaultDigit;
+                PageN = 0;
 
-        //         int digitN = NumPages.ToString().Length;
-        //         if (digitN < DefaultDigit) digitN = (int)DefaultDigit;
+                foreach (PdfDocument doc in splitDocuments)
+                {
+                    PageN++;
+                    string outFile = string.Format("{0}_Page {1:D" + digitN + "}.pdf", outFiles, PageN);
+                    LogHelper.Log($"Page: {Path.GetFileNameWithoutExtension(outFile)}");
 
-        //         for (int i = 1; i <= NumPages; i++)
-        //         {
-        //             if (PageN == 0 || PageN == i)
-        //             {
-        //                 string outFile = string.Format("{0}_Page {1:D" + digitN + "}.pdf", outFiles, i);
-        //                 FileStream stream = new FileStream(outFile, FileMode.Create);
+                    PdfReader reader = doc.GetReader();
+                    PdfWriter writer = new PdfWriter(outFile);
+                    PdfDocument SinglePageDoc = new PdfDocument(reader, writer);
 
-        //                 LogHelper.Log($"Page: {Path.GetFileNameWithoutExtension(outFile)}");
-        //                 Document doc = new Document();
-        //                 PdfCopy pdf = new PdfCopy(doc, stream);
+                    
+                    SinglePageDoc.Close();
+                    
+                    doc.Close();
+                }
 
-        //                 doc.Open();
-        //                 PdfImportedPage page = pdf.GetImportedPage(reader, i);
-        //                 pdf.AddPage(page);
+                pdfDoc.Close();
 
-        //                 pdf.Dispose();
-        //                 doc.Dispose();
-        //                 stream.Dispose();
-        //             }
-
-        //         }
-
-        //     }
-        //     catch(Exception e)
-        //     {
-        //         LogHelper.Log(e.ToString(), LogType.Error);
-        //     }
-        //     finally
-        //     {
-        //         reader?.Dispose();
-        //     }
-        // }
+            }
+            catch(Exception e)
+            {
+                LogHelper.Log(e.ToString(), LogType.Error);
+            }
+            finally
+            {
+            }
+        }
 
 
         // private static void AddBookmarks(List<string> files, PdfCopy OutFile)

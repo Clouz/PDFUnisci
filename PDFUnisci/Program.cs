@@ -178,12 +178,12 @@ namespace PDFUnisci
                     case 0:
                         break;
                     case 1:
-                    //TODO: 
-                    // if (Cover == null) PDFInterface.SplitPDF(Files.FirstOrDefault(), $"{OutFileName}_split", singlePageSplit);
-                    // else {
-                    //     OutFileNameFinal = $"{OutFileName}_merged.pdf";
-                    //     PDFInterface.ReplaceCoverPDF(Files.FirstOrDefault(), Cover, OutFileNameFinal); 
-                    // }
+                    
+                    if (Cover == null) PDFInterface.SplitPDF(Files.FirstOrDefault(), $"{OutFileName}_split", singlePageSplit);
+                    else {
+                        OutFileNameFinal = $"{OutFileName}_merged.pdf";
+                        //TODO: PDFInterface.ReplaceCoverPDF(Files.FirstOrDefault(), Cover, OutFileNameFinal); 
+                    }
                         break;
                     default:
 
@@ -192,7 +192,7 @@ namespace PDFUnisci
                             foreach (string file in Files)
                             {
                                 OutFileName = $"{Path.GetDirectoryName(file)}{Path.DirectorySeparatorChar}{Path.GetFileNameWithoutExtension(file)}";
-                                //TODO: PDFInterface.SplitPDF(file, $"{OutFileName}_split", singlePageSplit);
+                                PDFInterface.SplitPDF(file, $"{OutFileName}_split", singlePageSplit);
                             }
                         }
                         else
