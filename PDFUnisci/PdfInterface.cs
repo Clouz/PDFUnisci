@@ -247,7 +247,7 @@ namespace PDFUnisci
             try
             {
                 PdfDocument pdfDoc = new PdfDocument(new PdfReader(InFiles));
-                IList<PdfDocument> splitDocuments = new PdfSplitter(pdfDoc).SplitByPageCount(1);
+                IList<PdfDocument> splitDocuments = new CustomPdfSplitter(pdfDoc, OutDir).SplitByPageCount(1);
 
                 int NumPages = pdfDoc.GetNumberOfPages();
 
@@ -260,13 +260,6 @@ namespace PDFUnisci
                     PageN++;
                     string outFile = string.Format("{0}_Page {1:D" + digitN + "}.pdf", outFiles, PageN);
                     LogHelper.Log($"Page: {Path.GetFileNameWithoutExtension(outFile)}");
-
-                    PdfReader reader = doc.GetReader();
-                    PdfWriter writer = new PdfWriter(outFile);
-                    PdfDocument SinglePageDoc = new PdfDocument(reader, writer);
-
-                    
-                    SinglePageDoc.Close();
                     
                     doc.Close();
                 }
@@ -280,6 +273,21 @@ namespace PDFUnisci
             }
             finally
             {
+            }
+        }
+
+        private class CustomPdfSplitter : PdfSplitter
+        {
+            private String dest;
+            private int partNumber = 1;
+            
+            public CustomPdfSplitter(PdfDocument pdfDocument, String dest) : base(pdfDocument)
+            {
+                this.dest = dest;
+            }
+            
+            protected override PdfWriter GetNextPdfWriter(PageRange documentPageRange) {
+                return new PdfWriter(String.Format(dest, partNumber++));
             }
         }
 
