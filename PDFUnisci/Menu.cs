@@ -1,18 +1,18 @@
 using System;
 using System.IO;
 using System.Reflection;
-using IWshRuntimeLibrary;
+//using IWshRuntimeLibrary;
 
 namespace PDFUnisci
 {
     public static class Menu
     {
         public static void Create() {
-            string AssemblyVersion = Assembly.GetExecutingAssembly().GetName().Version.ToString();
-            string AssemblyTitle = Assembly.GetExecutingAssembly().GetName().Name;
+            string AssemblyVersion = "2.00";
+            string AssemblyTitle = "PDFUnisci";
 
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine($"{AssemblyTitle} {AssemblyVersion}\nCopyright(C) 2021 by Claudio Mola\n");
+            Console.WriteLine($"{AssemblyTitle} {AssemblyVersion}\nCopyright(C) 2023 by Claudio Mola\n");
             Console.ResetColor();
 
             Console.WriteLine("usage: PDFUnisci [options] filenames");
@@ -75,21 +75,21 @@ namespace PDFUnisci
                 if (risposta.ToLower() == "yes" || risposta.ToLower() == "y")
                 {
 
-                    //Creo il collegamento
-                    //object shDesktop = (object)"Desktop";
-                    WshShell shell = new WshShell();
-                    IWshShortcut shortcut = (IWshShortcut)shell.CreateShortcut(collegamento);
-                    shortcut.Description = "Shortcut for PDFUnisci";
-                    shortcut.TargetPath = System.Reflection.Assembly.GetExecutingAssembly().Location;
-                    shortcut.Save();
+                    // //Creo il collegamento
+                    // //object shDesktop = (object)"Desktop";
+                    // WshShell shell = new WshShell();
+                    // IWshShortcut shortcut = (IWshShortcut)shell.CreateShortcut(collegamento);
+                    // shortcut.Description = "Shortcut for PDFUnisci";
+                    // shortcut.TargetPath = System.Reflection.Assembly.GetExecutingAssembly().Location;
+                    // shortcut.Save();
 
-                    //Creo il collegamento2
-                    WshShell shell2 = new WshShell();
-                    IWshShortcut shortcut2 = (IWshShortcut)shell2.CreateShortcut(collegamento2);
-                    shortcut2.Description = "Shortcut for PDFUnisci flat";
-                    shortcut2.TargetPath = System.Reflection.Assembly.GetExecutingAssembly().Location;
-                    shortcut2.Arguments = "-flat";
-                    shortcut2.Save();
+                    // //Creo il collegamento2
+                    // WshShell shell2 = new WshShell();
+                    // IWshShortcut shortcut2 = (IWshShortcut)shell2.CreateShortcut(collegamento2);
+                    // shortcut2.Description = "Shortcut for PDFUnisci flat";
+                    // shortcut2.TargetPath = System.Reflection.Assembly.GetExecutingAssembly().Location;
+                    // shortcut2.Arguments = "-flat";
+                    // shortcut2.Save();
 
                     Console.Write("Link created...");
                     Console.Read();

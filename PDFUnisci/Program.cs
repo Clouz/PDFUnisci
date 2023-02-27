@@ -147,17 +147,17 @@ namespace PDFUnisci
             else if (Images.Count > 0)
             {
                 OutFileNameFinal = $"{OutFileNameImg}_ImgMerged.pdf";
-                PDFInterface.ImgToPDF(Images, OutFileNameFinal);
+                //TODO: PDFInterface.ImgToPDF(Images, OutFileNameFinal);
             }
             else if(flat)
             {
                 if (PDFInterface.FlatOnlyFirstPage == 1)
                 {
-                    PDFInterface.FlatPDFonlyFistPage(Files);
+                    //TODO: PDFInterface.FlatPDFonlyFistPage(Files);
                 }
                 else
                 {
-                    PDFInterface.FlatPDF(Files);
+                    //TODO: PDFInterface.FlatPDF(Files);
                 }
             }
             else if (createNewPageFormat != null)
@@ -165,7 +165,7 @@ namespace PDFUnisci
                 //Create a new file in the temp folder with random filename
                 OutFileNameFinal = System.IO.Path.GetTempPath() + "PDFUnisci_" + Guid.NewGuid().ToString() + ".pdf";
 
-                PDFInterface.CreateEmptyPage(OutFileNameFinal, pageSize: createNewPageFormat);
+                //TODO: PDFInterface.CreateEmptyPage(OutFileNameFinal, pageSize: createNewPageFormat);
 
                 LogHelper.Log($"Created a new Empty Page with size: {createNewPageFormat}", LogType.Successful);
                 LogHelper.Log($"File location: {OutFileNameFinal}", LogType.Normal);
@@ -178,11 +178,12 @@ namespace PDFUnisci
                     case 0:
                         break;
                     case 1:
-                        if (Cover == null) PDFInterface.SplitPDF(Files.FirstOrDefault(), $"{OutFileName}_split", singlePageSplit);
-                        else {
-                            OutFileNameFinal = $"{OutFileName}_merged.pdf";
-                            PDFInterface.ReplaceCoverPDF(Files.FirstOrDefault(), Cover, OutFileNameFinal); 
-                        }
+                    //TODO: 
+                    // if (Cover == null) PDFInterface.SplitPDF(Files.FirstOrDefault(), $"{OutFileName}_split", singlePageSplit);
+                    // else {
+                    //     OutFileNameFinal = $"{OutFileName}_merged.pdf";
+                    //     PDFInterface.ReplaceCoverPDF(Files.FirstOrDefault(), Cover, OutFileNameFinal); 
+                    // }
                         break;
                     default:
 
@@ -191,7 +192,7 @@ namespace PDFUnisci
                             foreach (string file in Files)
                             {
                                 OutFileName = $"{Path.GetDirectoryName(file)}{Path.DirectorySeparatorChar}{Path.GetFileNameWithoutExtension(file)}";
-                                PDFInterface.SplitPDF(file, $"{OutFileName}_split", singlePageSplit);
+                                //TODO: PDFInterface.SplitPDF(file, $"{OutFileName}_split", singlePageSplit);
                             }
                         }
                         else
