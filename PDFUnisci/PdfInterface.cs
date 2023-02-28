@@ -14,6 +14,7 @@ using System.Linq;
 using System;
 using iText.Kernel.Utils;
 using iText.Kernel.Geom;
+using iText.Kernel.Pdf.Annot;
 
 namespace PDFUnisci
 {
@@ -402,46 +403,43 @@ namespace PDFUnisci
         //     }
         // }
 
-        // public static void FlatPDF(List<string> files)
-        // {
+        public static void FlatPDF(List<string> files)
+        {
 
-        //     LogHelper.Log("Flatt all PDF comments", LogType.Successful);
+            LogHelper.Log("Flatt all PDF comments", LogType.Successful);
 
-        //     foreach (var file in files)
-        //     {
-        //         string OutFile = $"{Path.GetDirectoryName(file)}{Path.DirectorySeparatorChar}{Path.GetFileNameWithoutExtension(file)}_flat.pdf";
+            foreach (var file in files)
+            {
+                string OutFile = $"{System.IO.Path.GetDirectoryName(file)}{System.IO.Path.DirectorySeparatorChar}{System.IO.Path.GetFileNameWithoutExtension(file)}_flat.pdf";
 
-        //         LogHelper.Log($"Flattening file: { Path.GetFileNameWithoutExtension(file)}");
+                LogHelper.Log($"Flattening file: {System.IO.Path.GetFileNameWithoutExtension(file)}");
 
-        //         using (FileStream stream = new FileStream(OutFile, FileMode.Create))
-        //         {
-        //             PdfReader reader = null;
-        //             PdfStamper stamper = null;
-        //             try
-        //             {
-        //                 reader = new PdfReader(file);
+                try
+                {
+                    PdfDocument pdfDoc = new PdfDocument(new PdfReader(file), new PdfWriter(OutFile));
+                    PdfAcroForm form = PdfAcroForm.GetAcroForm(pdfDoc, true);
+                    form.FlattenFields();
+                    //TODO: Add AnnotationFlattening and FreeTextFlattening
 
-        //                 stamper = new PdfStamper(reader, stream)
-        //                 {
-        //                     FormFlattening = true,
-        //                     AnnotationFlattening = true,
-        //                     FreeTextFlattening = true,
-        //                 };
-        //                 stamper.Close();
-        //             }
-        //             catch (Exception e)
-        //             {
-        //                 LogHelper.Log(e.ToString(), LogType.Error);
+                    pdfDoc.Close();
 
-        //                 reader?.Close();
-        //             }
-        //             finally
-        //             {
-        //                 reader?.Close();
-        //             }
-        //         }
-        //     }
-        // }
+                    // PdfStamper stamper = new PdfStamper(reader, stream)
+                    // {
+                    //     FormFlattening = true,
+                    //     AnnotationFlattening = true,
+                    //     FreeTextFlattening = true,
+                    // };
+                    // stamper.Close();
+                }
+                catch (Exception e)
+                {
+                    LogHelper.Log(e.ToString(), LogType.Error);
+                }
+                finally
+                {
+                }
+            }
+        }
 
 
         // public static void FlatPDFonlyFistPage(List<string> files)
