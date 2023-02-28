@@ -6,7 +6,7 @@ namespace PDFUnisci
 {
     static class Config
     {
-        static XDocument config = null;
+        static XDocument? config = null;
 
         static int _ExitConfirmation = 0;
         public static int ExitConfirmation

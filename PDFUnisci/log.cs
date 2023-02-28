@@ -56,7 +56,7 @@ namespace LogManager
 
     public static class LogHelper
     {
-        private static LogBase logger = null;
+        private static LogBase? logger = null;
         public static List<string> ErrorLog = new List<string>();
 
         public static void Log(string message, LogTarget target = LogTarget.Console, LogType type = LogType.Normal)

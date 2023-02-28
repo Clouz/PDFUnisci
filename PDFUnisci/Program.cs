@@ -35,12 +35,12 @@ namespace PDFUnisci
             List<string> Files = new List<string>();
             List<string> Images = new List<string>();
 
-            string Cover = null;
+            string? Cover = null;
             bool flat = false;
             bool splitAll = false;
             bool autoOpenFile = false;
             int singlePageSplit = 0;
-            string createNewPageFormat = null;
+            string? createNewPageFormat = null;
 
 
             //leggo il file di configurazione

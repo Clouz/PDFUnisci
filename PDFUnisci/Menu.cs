@@ -44,7 +44,7 @@ namespace PDFUnisci
             if (System.IO.File.Exists(collegamento)) {
                 Console.WriteLine("Do you want to delete the link to 'Send to'? [Yes, No]");
                 Console.Write("> ");
-                string risposta = Console.ReadLine();
+                string? risposta = Console.ReadLine();
 
                 if(risposta.ToLower() == "yes" || risposta.ToLower() == "y")
                 {
@@ -70,7 +70,7 @@ namespace PDFUnisci
 
                 Console.WriteLine("You want to create a link to 'Send to'? [Yes, No]");
                 Console.Write("> ");
-                string risposta = Console.ReadLine();
+                string? risposta = Console.ReadLine();
 
                 if (risposta.ToLower() == "yes" || risposta.ToLower() == "y")
                 {
