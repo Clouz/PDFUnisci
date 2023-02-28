@@ -13,6 +13,7 @@ using LogManager;
 using System.Linq;
 using System;
 using iText.Kernel.Utils;
+using iText.Kernel.Geom;
 
 namespace PDFUnisci
 {
@@ -235,7 +236,7 @@ namespace PDFUnisci
 
         public static void SplitPDF(string InFiles, string OutDir = "", int PageN = 0)
         {
-            string outFiles = OutDir + Path.AltDirectorySeparatorChar + Path.GetFileNameWithoutExtension(InFiles);
+            string outFiles = OutDir + System.IO.Path.AltDirectorySeparatorChar + System.IO.Path.GetFileNameWithoutExtension(InFiles);
 
             if (OutDir != ""){
                 LogHelper.Log($"I create the directory: {OutDir}");
@@ -247,20 +248,10 @@ namespace PDFUnisci
             try
             {
                 PdfDocument pdfDoc = new PdfDocument(new PdfReader(InFiles));
-                IList<PdfDocument> splitDocuments = new CustomPdfSplitter(pdfDoc, OutDir).SplitByPageCount(1);
-
-                int NumPages = pdfDoc.GetNumberOfPages();
-
-                int digitN = NumPages.ToString().Length;
-                if (digitN < DefaultDigit) digitN = (int)DefaultDigit;
-                PageN = 0;
+                IList<PdfDocument> splitDocuments = new CustomPdfSplitter(pdfDoc, outFiles).SplitByPageCount(1);
 
                 foreach (PdfDocument doc in splitDocuments)
                 {
-                    PageN++;
-                    string outFile = string.Format("{0}_Page {1:D" + digitN + "}.pdf", outFiles, PageN);
-                    LogHelper.Log($"Page: {Path.GetFileNameWithoutExtension(outFile)}");
-                    
                     doc.Close();
                 }
 
@@ -280,14 +271,23 @@ namespace PDFUnisci
         {
             private String dest;
             private int partNumber = 1;
+            private int NumPages;
+            private int digitN;
             
             public CustomPdfSplitter(PdfDocument pdfDocument, String dest) : base(pdfDocument)
             {
                 this.dest = dest;
+                this.NumPages = pdfDocument.GetNumberOfPages();
+                this.digitN = NumPages.ToString().Length;
+
+                if (digitN < DefaultDigit) digitN = (int)DefaultDigit;
+
             }
             
             protected override PdfWriter GetNextPdfWriter(PageRange documentPageRange) {
-                return new PdfWriter(String.Format(dest, partNumber++));
+                string outFile = string.Format("{0}_Page {1:D" + digitN + "}.pdf", dest, partNumber++);
+                LogHelper.Log($"Page: {System.IO.Path.GetFileNameWithoutExtension(outFile)}");
+                return new PdfWriter(outFile);
             }
         }
 
